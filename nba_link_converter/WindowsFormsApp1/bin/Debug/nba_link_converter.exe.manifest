@@ -4,7 +4,7 @@
   <description asmv2:iconFile="NBA_1024px_1186144_easyicon.net.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="nba_link_converter" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="nba_link_converter" version="1.0.1.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="nba_link_converter.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="nba_link_converter.exe" size="1514920">
-      <assemblyIdentity name="nba_link_converter" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="nba_link_converter.exe" size="1521576">
+      <assemblyIdentity name="nba_link_converter" version="1.0.1.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vXLR3LkFhhcQ3vjvDK7PkxaDPrflz3eFkm0x1Awljgc=</dsig:DigestValue>
+        <dsig:DigestValue>8sPGTglwEbJVuLiK/k2IdxkCGGN3jkJJt6XvKu7HM7U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
