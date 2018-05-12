@@ -51,7 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>NBA_128px_1186144_easyicon.net.ico</ApplicationIcon>
+    <ApplicationIcon>NBA_1024px_1186144_easyicon.net.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>387D74674187A616C3DBD13060DC49AD514A6338</ManifestCertificateThumbprint>
@@ -116,6 +116,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="NBA_1024px_1186144_easyicon.net.ico" />
     <Content Include="NBA_128px_1186144_easyicon.net.ico" />
   </ItemGroup>
   <ItemGroup>
