@@ -1,3 +1,5 @@
+![logo](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/NBA_1024px_1186144_easyicon.net.png)
+
 ## Description
 
 	A simple script to strip the links from nba.com.
@@ -18,7 +20,7 @@ v1.0.1
 
 ### hover at topmost
 
-![](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/nba_link_converter/hover.gif)
+![hover](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/nba_link_converter/hover.gif)
 
 ### process either the raw link or the wrapper tag containing the link
 
@@ -28,7 +30,7 @@ v1.0.1
 
 	run it. after copying the text containing the link for the picture, click the textbox and it will read your clipboard for the link and open the picture in default browser.
 
-	![](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/nba_link_converter/usage.gif)
+![usage](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/nba_link_converter/usage.gif)
 
 
 ## Keywords
