@@ -1,8 +1,8 @@
-![logo](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/NBA_1024px_1186144_easyicon.net.png)
+![logo](https://github.com/yo1995/Daily_GUI_Tools/raw/master/nba_link_converter/NBA_1024px_1186144_easyicon.net.png)
 
 ## Description
 
-	A simple script to strip the links from nba.com.
+A simple script to strip the links from nba.com.
 
 ## Versions
 
@@ -24,15 +24,15 @@ v1.0.1
 
 ### process either the raw link or the wrapper tag containing the link
 
-	e.g. you can just use it like shown below. copy the whole tag or just find the link.
+e.g. you can just use it like shown below. copy the whole tag or just find the link.
 
 ## Usage
 
-	run it. after copying the text containing the link for the picture, click the textbox and it will read your clipboard for the link and open the picture in default browser.
+run it. after copying the text containing the link for the picture, click the textbox and it will read your clipboard for the link and open the picture in default browser.
 
 ![usage](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/nba_link_converter/usage.gif)
 
 
 ## Keywords
 
-	nba | tool | easy | picture | strip
+nba | tool | easy | picture | strip
