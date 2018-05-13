@@ -99,7 +99,8 @@ namespace WindowsFormsApp1
 
         private void textBox1_Click(object sender, EventArgs e)
         {
-            string result_link;
+            string result_link = null;
+            acquired_link = null;  // clear the var to ensure nothing goes wrong
             IDataObject data = Clipboard.GetDataObject();
             if (data.GetDataPresent(DataFormats.Text))
             {
@@ -110,17 +111,19 @@ namespace WindowsFormsApp1
             pattern0 = "src\\s*=\\s*\"(.+?)\"";  // src\s*=\s*"(.+?)"
             pattern1 = "http(.+?)nba(.+?)itok.{8}";  // https://cdn.nba.net/nba-drupal-prod/styles/square/s3/2018-05/rozierlebron.jpg?itok=zEjaJn2
             Regex rgx0 = new Regex(pattern0);
-
+            
+            
+            if (acquired_link.Contains("nba")) {
+                Regex rgx1 = new Regex(pattern1);
+                Match m2 = rgx1.Match(acquired_link);
+                acquired_link = m2.Groups[0].Value;
+            }
+            // some ak-static pictures does not match that pattern. try anyway 
             if (acquired_link.Contains("src=\"")) {
                 Match m1 = rgx0.Match(acquired_link);
                 acquired_link = m1.Groups[0].Value;
                 int length = acquired_link.Length;
                 acquired_link = acquired_link.Substring(5, length - 6);  // src=""
-            }
-            if (acquired_link.Contains("nba")) {
-                Regex rgx1 = new Regex(pattern1);
-                Match m2 = rgx1.Match(acquired_link);
-                acquired_link = m2.Groups[0].Value;
             }
 
 
