@@ -1,0 +1,9 @@
+﻿  main.cpp
+c:\users\yo-ch\source\repos\cube_overlay\cube_overlay\main.cpp(152): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\yo-ch\source\repos\cube_overlay\cube_overlay\main.cpp(282): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+c:\users\yo-ch\source\repos\cube_overlay\cube_overlay\main.cpp(283): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+c:\users\yo-ch\source\repos\cube_overlay\cube_overlay\main.cpp(295): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+c:\users\yo-ch\source\repos\cube_overlay\cube_overlay\main.cpp(296): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+c:\users\yo-ch\source\repos\cube_overlay\cube_overlay\main.cpp(561): warning C4244: “=”: 从“const int”转换到“FLOAT”，可能丢失数据
+c:\users\yo-ch\source\repos\cube_overlay\cube_overlay\main.cpp(562): warning C4244: “=”: 从“const int”转换到“FLOAT”，可能丢失数据
+  cube_overlay.vcxproj -> C:\Users\yo-ch\source\repos\cube_overlay\Debug\cube_overlay.exe

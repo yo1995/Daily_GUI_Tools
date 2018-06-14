@@ -1,0 +1,7 @@
+﻿  overlay_detector.cpp
+c:\users\yo-ch\source\repos\overlay_detector\overlay_detector.cpp(44): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\yo-ch\source\repos\overlay_detector\overlay_detector.cpp(117): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+c:\users\yo-ch\source\repos\overlay_detector\overlay_detector.cpp(118): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+c:\users\yo-ch\source\repos\overlay_detector\overlay_detector.cpp(130): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+c:\users\yo-ch\source\repos\overlay_detector\overlay_detector.cpp(131): warning C4244: “初始化”: 从“LONG”转换到“float”，可能丢失数据
+  Project1.vcxproj -> C:\Users\yo-ch\source\repos\Overlay_detector\Debug\Project1.exe

@@ -1,0 +1,13 @@
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\univ_link_converter.csproj.GenerateResource.Cache
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\univ_link_converter.csproj.CoreCompileInputs.cache
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\bin\Debug\universal_link_converter.exe.config
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\bin\Debug\universal_link_converter.exe.manifest
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\bin\Debug\universal_link_converter.application
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\bin\Debug\universal_link_converter.exe
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\bin\Debug\universal_link_converter.pdb
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\universal_link_converter.exe.manifest
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\universal_link_converter.application
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\universal_link_converter.exe
+C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\universal_link_converter\WindowsFormsApp1\obj\Debug\universal_link_converter.pdb
