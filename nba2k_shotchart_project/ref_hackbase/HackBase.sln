@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HackBase", "HackBase\HackBase.vcxproj", "{97021A3F-EC7F-43CE-9207-D64271EEB4BD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hack-base-use", "Hack-base-use\Hack-base-use.vcxproj", "{CDDE3092-4B39-4170-A158-7C68BE2A37BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97021A3F-EC7F-43CE-9207-D64271EEB4BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{97021A3F-EC7F-43CE-9207-D64271EEB4BD}.Debug|Win32.Build.0 = Debug|Win32
+		{97021A3F-EC7F-43CE-9207-D64271EEB4BD}.Debug|x64.ActiveCfg = Debug|Win32
+		{97021A3F-EC7F-43CE-9207-D64271EEB4BD}.Release|Win32.ActiveCfg = Release|Win32
+		{97021A3F-EC7F-43CE-9207-D64271EEB4BD}.Release|Win32.Build.0 = Release|Win32
+		{97021A3F-EC7F-43CE-9207-D64271EEB4BD}.Release|x64.ActiveCfg = Release|Win32
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Debug|Win32.Build.0 = Debug|Win32
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Debug|x64.ActiveCfg = Debug|x64
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Debug|x64.Build.0 = Debug|x64
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Release|Win32.ActiveCfg = Release|Win32
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Release|Win32.Build.0 = Release|Win32
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Release|x64.ActiveCfg = Release|x64
+		{CDDE3092-4B39-4170-A158-7C68BE2A37BF}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9A68D21-1145-4A7A-AA27-DA36B737BA69}
+	EndGlobalSection
+EndGlobal

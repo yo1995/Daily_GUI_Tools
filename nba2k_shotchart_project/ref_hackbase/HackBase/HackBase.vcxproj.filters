@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="tools.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="imports.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="detourxs.h">
+      <Filter>detours</Filter>
+    </ClInclude>
+    <ClInclude Include="ade32.h">
+      <Filter>detours</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d9renderer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d11renderer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d10renderer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="encryption.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="hackbase.h" />
+    <ClInclude Include="string.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d9hook.h">
+      <Filter>hook</Filter>
+    </ClInclude>
+    <ClInclude Include="dxgihook.h">
+      <Filter>hook</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboardhook.h">
+      <Filter>hook</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tools.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="imports.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ade32.cpp">
+      <Filter>detours</Filter>
+    </ClCompile>
+    <ClCompile Include="detourxs.cpp">
+      <Filter>detours</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d9renderer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d11renderer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d10renderer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="encryption.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="hackbase.cpp" />
+    <ClCompile Include="d3d9hook.cpp">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="dxgihook.cpp">
+      <Filter>hook</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="detours">
+      <UniqueIdentifier>{1dbadccf-31e6-4884-b3b8-a18eb8789a23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hook">
+      <UniqueIdentifier>{13836d88-65df-4d38-a98c-a5221cd8342f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{da7f0a2a-0f2b-4aec-bc03-e41bbd992245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{6f62edef-9ea3-4053-8bee-a7edf9681341}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
