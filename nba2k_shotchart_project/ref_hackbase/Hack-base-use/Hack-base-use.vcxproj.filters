@@ -27,9 +27,15 @@
     <ClCompile Include="..\Hackbase\trainergraphic.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\Hackbase\memoryaccess.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\HackBase\hotkey.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Hackbase\memoryaccess.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
