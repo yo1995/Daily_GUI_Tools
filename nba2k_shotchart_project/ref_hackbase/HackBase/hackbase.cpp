@@ -119,6 +119,17 @@ bool HackBase::Initialize(void (__cdecl *onRender)(Renderer *), const String Exe
 	return true;
 }
 
+void HackBase::setOnRender(void(__cdecl *onRender)(Renderer*)) {
+	this->onRender = onRender;
+}
+
+// hey you cannot just close me like that!
+/*
+void HackBase::unsetOnRender() {
+	this->onRender = 0;
+}
+*/
+
 HackBase::~HackBase() {
 	SAFE_DELETE(this->mD3D9Hook);
 	SAFE_DELETE(this->mDXGIHook);

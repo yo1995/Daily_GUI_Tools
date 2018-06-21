@@ -7,12 +7,15 @@
 HackBase *mHackBase = 0;
 char inject_text[] = "injected and hooked by yo1995.";
 
+/*
 void onRender(Renderer *renderer) {
 	// renderer->DrawBorder(0, 0, renderer->GetWidth(), renderer->GetHeight(), 5, GREEN(255));
 	// renderer->DrawLine(0, 0, renderer->GetWidth(), renderer->GetHeight(), 2, false, Color(255, 0, 255, 0));
 	// renderer->DrawText((int)(0.5 * renderer->GetWidth()), (int)(0.5 * renderer->GetHeight()), inject_text);
 	// renderer->DrawCircle((int)(0.5 * renderer->GetWidth()), (int)(0.5 * renderer->GetHeight()), 30, 2, 30, Color(255, 0, 255, 0));
 }
+*/
+
 
 void UpdateDMAs() {
 	// aka direct memory access. manipulate the memory region.
@@ -31,14 +34,15 @@ void init_main() {
 		MessageBox(0, "Error hooking game. Maybe injected into wrong process...", "Failed to hook...", MB_ICONERROR);
 	// MessageBox(0, "We are here hehe.", "nana...", 0);
 	/*
-	while (true) { // there will be an exit flag but not right now
+	while (true) {
 		UpdateDMAs();
 		UpdateHacks();
 		Sleep(10);
 	}
 	*/
-	while (true) { //infinite loop!
+	while (true) { //infinite loop! might affect the performance.
 		UpdateHotkey(mHackBase);
+		
 		Sleep(200); // loop will only start again after 1/5 of a second
 	}
 }

@@ -162,6 +162,10 @@ public:
 	static HackBase *Singleton();
 
 	bool Initialize(void (__cdecl *onRender)(Renderer*) = NULL, const String ExecuteableFile = NULL, const String WindowName = NULL, const String WindowClass = NULL);
+	
+	void setOnRender(void(__cdecl *onRender)(Renderer*) = NULL);
+	// void unsetOnRender();
+
 	~HackBase();
 
 	HWND getConsoleWindow() { return this->mConsoleWindow; }
