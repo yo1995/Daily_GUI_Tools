@@ -137,6 +137,11 @@ typedef std::vector<String> StringVector;
 #pragma endregion
 
 
+#pragma region Font defaults
+#define FontSize_default 20
+#define FontFamily_default "Arial"
+#define FontColor_default RED(255)
+#pragma endregion
 
 class HackBase {
 private:

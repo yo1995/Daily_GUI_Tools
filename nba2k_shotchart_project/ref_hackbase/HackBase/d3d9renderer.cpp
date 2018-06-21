@@ -55,13 +55,13 @@ bool D3D9Renderer::CreateFont() {
 		return false;
 	if (!Imports::Singleton()->D3DXCreateFont)
 		return false;
-	if (FAILED(Imports::Singleton()->D3DXCreateFont(pDevice, 15, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial", &(this->mFont))))
+	if (FAILED(Imports::Singleton()->D3DXCreateFont(pDevice, FontSize_default, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &(this->mFont))))
 		return false;
 	return true;
 }
 
 
-void D3D9Renderer::DrawText(int x, int y, char *Text, ...) {
+void D3D9Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
 	if (!Text)
 		return;
 	if (!this->CreateFont())
@@ -72,7 +72,7 @@ void D3D9Renderer::DrawText(int x, int y, char *Text, ...) {
 	vsprintf_s(buf, 1023, Text, arglist);
 	va_end(arglist);
 	RECT rcScreen = { x, y, x + 200, y + 100 };
-	mFont->DrawText(NULL, buf, strlen(buf), &rcScreen, DT_CENTER, D3DCOLOR_ARGB(255, 255, 0, 0));
+	mFont->DrawText(NULL, buf, strlen(buf), &rcScreen, DT_CENTER, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
 	mFont->Release();
 }
 

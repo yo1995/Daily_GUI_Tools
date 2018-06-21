@@ -166,7 +166,7 @@ void D3D10Renderer::DrawCircle(int x, int y, float radius, int width, UINT sampl
 	}
 }
 
-void D3D10Renderer::DrawText(int x, int y, char *Text, ...) {
+void D3D10Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
 	if(!Text)
 		return;
 
@@ -180,7 +180,7 @@ void D3D10Renderer::DrawText(int x, int y, char *Text, ...) {
 	va_end(arglist);
 
 	RECT rcScreen = { x, y, x + 2000, y + 1000 };
-	mFont->DrawText( NULL, buf, strlen(buf), &rcScreen, DT_CENTER, D3DCOLOR_ARGB( 255, 255, 0, 0 ) );
+	mFont->DrawText( NULL, buf, strlen(buf), &rcScreen, DT_CENTER, D3DCOLOR_ARGB(color.a, color.b, color.g, color.r) );
 }
 
 int D3D10Renderer::GetWidth() {

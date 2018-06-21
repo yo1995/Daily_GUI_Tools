@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\HackBase\keyboardhook.h">
+    <ClInclude Include="..\HackBase\hotkey.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
