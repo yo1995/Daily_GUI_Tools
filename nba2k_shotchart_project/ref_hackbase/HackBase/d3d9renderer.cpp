@@ -35,12 +35,12 @@ void D3D9Renderer::DrawBorder(int x, int y, int w, int h, int d, Color color) {
 	this->DrawRect(x + d, y + h - d, w - 2 * d, d, color);
 }
 
-void D3D9Renderer::DrawLine(int x1, int y1, int x2, int y2, float width, bool antialias, Color color) {
+void D3D9Renderer::DrawLine(float x1, float y1, float x2, float y2, int width, bool antialias, Color color) {
 	// dont actually need to draw an angled line. might implement in the future.
 	ID3DXLine *m_Line;
 	D3DXCreateLine(pDevice, &m_Line); // this one depends on d3dx9.lib which should be deprecated. change in the future?
 	D3DXVECTOR2 line[] = { D3DXVECTOR2(x1, y1), D3DXVECTOR2(x2, y2) };
-	m_Line->SetWidth(width);
+	m_Line->SetWidth((float)width);
 	//if (antialias) 
 	//  m_Line->SetAntialias(1);
 	m_Line->Begin();
@@ -55,7 +55,7 @@ bool D3D9Renderer::CreateFont() {
 		return false;
 	if (!Imports::Singleton()->D3DXCreateFont)
 		return false;
-	if (FAILED(Imports::Singleton()->D3DXCreateFont(pDevice, FontSize_default, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &(this->mFont))))
+	if (FAILED(Imports::Singleton()->D3DXCreateFont(pDevice, FontSize_default, 0, FontWeight_default, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &(this->mFont))))
 		return false;
 	return true;
 }
@@ -71,8 +71,22 @@ void D3D9Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
 	va_start(arglist, Text);
 	vsprintf_s(buf, 1023, Text, arglist);
 	va_end(arglist);
-	RECT rcScreen = { x, y, x + 200, y + 100 };
-	mFont->DrawText(NULL, buf, strlen(buf), &rcScreen, DT_CENTER, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
+	RECT rect;
+	switch (text_alignment_default) {
+		case lefted:
+			SetRect(&rect, x, y, x, y);
+			mFont->DrawText(NULL, buf, strlen(buf), &rect, DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
+			break;
+		case centered:
+			SetRect(&rect, x, y, x, y);
+			mFont->DrawText(NULL, buf, strlen(buf), &rect, DT_CENTER | DT_NOCLIP, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
+			break;
+		case righted:
+			SetRect(&rect, x, y, x, y);
+			mFont->DrawText(NULL, buf, strlen(buf), &rect, DT_RIGHT | DT_NOCLIP, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
+			break;
+	}
+	// mFont->DrawText(NULL, buf, strlen(buf), &rcScreen, DT_CENTER, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
 	mFont->Release();
 }
 

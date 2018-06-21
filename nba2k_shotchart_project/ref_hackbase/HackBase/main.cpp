@@ -2,7 +2,7 @@
 #pragma comment(lib, "d3dx9.lib") // for the helly Drawline function.
 
 #include "hackbase.h"
-#include "hotkey.h"
+#include "trainerbase.h"
 
 HackBase *mHackBase = 0;
 char inject_text[] = "injected and hooked by yo1995.";
@@ -30,7 +30,7 @@ void init_main() {
 	char exename[] = "nba2k11.exe"; //GFXTest32.exe nba2k11.exe
 	char windowname[] = "NBA 2K11"; //Renderer: [DirectX9], Input: [Raw input], 32 bits  NBA 2K11
 	mHackBase = HackBase::Singleton();
-	if (!mHackBase->Initialize(onRender, exename, windowname))
+	if (!mHackBase->Initialize(onRender_clear, exename, windowname))
 		MessageBox(0, "Error hooking game. Maybe injected into wrong process...", "Failed to hook...", MB_ICONERROR);
 	// MessageBox(0, "We are here hehe.", "nana...", 0);
 	/*
@@ -42,7 +42,6 @@ void init_main() {
 	*/
 	while (true) { //infinite loop! might affect the performance.
 		UpdateHotkey(mHackBase);
-		
 		Sleep(200); // loop will only start again after 1/5 of a second
 	}
 }

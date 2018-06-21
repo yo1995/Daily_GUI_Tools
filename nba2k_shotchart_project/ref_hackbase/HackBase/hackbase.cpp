@@ -119,7 +119,7 @@ bool HackBase::Initialize(void (__cdecl *onRender)(Renderer *), const String Exe
 	return true;
 }
 
-void HackBase::setOnRender(void(__cdecl *onRender)(Renderer*)) {
+void HackBase::setOnRender(void(__cdecl *onRender)(Renderer *)) {
 	this->onRender = onRender;
 }
 

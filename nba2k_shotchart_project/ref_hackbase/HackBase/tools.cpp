@@ -1,6 +1,8 @@
 #include "hackbase.h"
 
 WindowsVersion getWindowsVersion() {
+	/* deprecated calls */
+	/*
 	OSVERSIONINFO osvi;
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
@@ -17,6 +19,23 @@ WindowsVersion getWindowsVersion() {
 	//	return WindowsVersion_Win8;
 	//else if (osvi.dwMajorVersion == 10 && osvi.dwMinorVersion == 0) //https://msdn.microsoft.com/en-us/library/windows/desktop/ms724834%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396
 	//	return WindowsVersion_Win10;
+	return WindowsVersion_Unknown;
+	*/
+	if (!IsWindowsXPOrGreater()) {
+		return WindowsVersion_XP;
+	}
+	if (!IsWindowsVistaOrGreater()) {
+		return WindowsVersion_Vista;
+	}
+	if (!IsWindows7OrGreater()) {
+		return WindowsVersion_Win7;
+	}
+	if (!IsWindows8OrGreater()) {
+		return WindowsVersion_Win8;
+	}
+	if (!IsWindows10OrGreater()) { // must contain manifest, just ignore.
+		return WindowsVersion_Win10;
+	}
 	return WindowsVersion_Unknown;
 }
 

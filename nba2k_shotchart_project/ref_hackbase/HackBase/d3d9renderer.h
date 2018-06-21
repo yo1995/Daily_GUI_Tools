@@ -18,7 +18,7 @@ public:
 	void RefreshData(IDirect3DDevice9 *Device);
 	void DrawRect(int x, int y, int w, int h, Color color);
 	void DrawBorder(int x, int y, int w, int h, int d, Color color);
-	void DrawLine(int x1, int y1, int x2, int y2, float size, bool antialias, Color color);
+	void DrawLine(float x1, float y1, float x2, float y2, int size, bool antialias, Color color);
 	void DrawText(int x, int y, Color FontColor, char *Text, ...);
 	void DrawCircle(int x, int y, float radius, int width, UINT samples, Color color);
 	int GetWidth();

@@ -18,10 +18,19 @@
     <ClCompile Include="..\HackBase\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\Hackbase\hotkey.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HackBase\trainerbase.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Hackbase\trainergraphic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\HackBase\hotkey.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -27,6 +27,7 @@
 #include <string>
 #include <time.h>
 #include <algorithm>
+#include <VersionHelpers.h>
 
 #pragma warning (push)
 #pragma warning (disable: 4005)
@@ -141,6 +142,8 @@ typedef std::vector<String> StringVector;
 #define FontSize_default 20
 #define FontFamily_default "Arial"
 #define FontColor_default RED(255)
+#define text_alignment_default lefted
+#define FontWeight_default FW_BOLD // FW_NORMAL FW_BOLD
 #pragma endregion
 
 class HackBase {
