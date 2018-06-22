@@ -9,36 +9,52 @@ OMG WTH for several time i just wanted to refactor the whole piece of s**t! so c
 */
 #include "hackbase.h"
 
-#pragma region hotkey related things
-#include "hotkey.h"
-#pragma endregion
-
-#pragma region DMA related things
-#include "memoryaccess.h"
-#pragma endregion
-
-extern int score_type;
-
+// F7 was dedicated to be toggle of god mode.
 extern char* F7_text;
 extern char F7_text_f[];
 extern char F7_text_t[];
+extern bool all_players_god_mode;
 
+// to decide the genre of ball into the rim.
+extern int score_type;
+extern int score_judge;
 extern char* score_type_text;
+extern char* score_judge_text;
 extern char score_type_0[];
 extern char score_type_1[];
 extern char score_type_2[];
 extern char score_type_3[];
+extern char score_type_8[];
 extern char score_type_other[];
+extern char score_judge_0[];
+extern char score_judge_1[];
 
-extern bool all_players_god_mode;
+// time related
+extern char total_time_elapsed[];
+extern char game_time_elapsed[];
+extern char shot_triggered_time[];
+
+// general flags for toggling.
 extern bool record_shot_chart_and_more;
-extern bool made_shot_prediction;
+extern bool clear_screen;
+extern bool clear_screen_already_cleared;
 
 void onRender_clear(Renderer *renderer); 
 
 void onRender_dashboard(Renderer *renderer);
 
-void onRender_F7(Renderer *renderer);
+// void onRender_F7(Renderer *renderer) {};
 
+// 读写判断值，读写显示字符串，实现开关模式
+bool IsKeyDown(DWORD key);
+void UpdateHotkeys();
+// 读取判断值，读写内存数据，实现读取投篮数据/写入无敌模式
+void update_score_type(HANDLE pHandle);
+void change_god_mode(HANDLE pHandle);
+void UpdateDMAs(HANDLE pHandle);
+void UpdateDMA_afterKeyDown(HANDLE pHandle_r, HANDLE pHandle_w);
+// 读取判断值，绘制屏幕
+void UpdateBools();
+void UpdateGraphics(HackBase *mHackBase);
 
 #endif

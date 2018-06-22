@@ -139,9 +139,9 @@ typedef std::vector<String> StringVector;
 
 
 #pragma region Font defaults
-#define FontSize_default 20
+#define FontSize_default 40
 #define FontFamily_default "Arial"
-#define FontColor_default RED(255)
+#define FontColor_default DEEPSKYBLUE(255)
 #define text_alignment_default lefted
 #define FontWeight_default FW_BOLD // FW_NORMAL FW_BOLD
 #pragma endregion

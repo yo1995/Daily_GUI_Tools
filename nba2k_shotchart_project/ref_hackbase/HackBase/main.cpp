@@ -7,44 +7,6 @@
 HackBase *mHackBase = 0;
 char inject_text[] = "injected and hooked by yo1995.";
 
-// 0x0595fa70
-DWORD score_type_addr = 0x05D5FA70;
-
-/*
-void onRender(Renderer *renderer) {
-	// renderer->DrawBorder(0, 0, renderer->GetWidth(), renderer->GetHeight(), 5, GREEN(255));
-	// renderer->DrawLine(0, 0, renderer->GetWidth(), renderer->GetHeight(), 2, false, Color(255, 0, 255, 0));
-	// renderer->DrawText((int)(0.5 * renderer->GetWidth()), (int)(0.5 * renderer->GetHeight()), inject_text);
-	// renderer->DrawCircle((int)(0.5 * renderer->GetWidth()), (int)(0.5 * renderer->GetHeight()), 30, 2, 30, Color(255, 0, 255, 0));
-}
-*/
-
-
-void UpdateDMAs() {
-	// aka direct memory access. manipulate the memory region.
-	switch (score_type)
-	{
-	case 0:
-		score_type_text = score_type_0;
-		break;
-	case 1:
-		score_type_text = score_type_1;
-		break;
-	case 2:
-		score_type_text = score_type_2;
-		break;
-	case 3:
-		score_type_text = score_type_3;
-		break;
-	default:
-		score_type_text = score_type_other;
-		break;
-	}
-}
-
-void UpdateHacks() {
-
-}
 
 void init_main() {
 	char exename[] = "nba2k11.exe"; //GFXTest32.exe nba2k11.exe
@@ -57,25 +19,19 @@ void init_main() {
 	HWND hWnd = FindWindowA(0, windowname);
 	DWORD pid;
 	GetWindowThreadProcessId(hWnd, &pid);
-	HANDLE pHandle = OpenProcess(PROCESS_VM_READ, false, pid);
+	// PROCESS_VM_READ: read only; PROCESS_VM_OPERATION: r/w - seems not working; PROCESS_VM_WRITE
+	HANDLE pHandle_r = OpenProcess(PROCESS_VM_READ, false, pid);
+	// https://www.unknowncheats.me/forum/c-and-c-/194439-writeprocessmemory.html
+	HANDLE pHandle_w = OpenProcess(PROCESS_VM_WRITE | PROCESS_VM_OPERATION, false, pid);
 	if (!hWnd || !pid) {
 		MessageBox(0, "Error Finding Window.", "Window mismatch!", MB_ICONERROR);
 		return;
 	}
-
-	// MessageBox(0, "We are here hehe.", "nana...", 0);
-	/*
-	while (true) {
-		UpdateDMAs();
-		UpdateHacks();
-		Sleep(10);
-	}
-	*/
-	
 	while (true) { //infinite loop! might affect the performance.
-		ReadProcessMemory(pHandle, (LPVOID)score_type_addr, &score_type, sizeof(score_type), 0);
-		UpdateDMAs();
-		UpdateHotkey(mHackBase);
+		UpdateHotkeys();
+		UpdateDMAs(pHandle_r);
+		UpdateDMA_afterKeyDown(pHandle_r, pHandle_w);
+		UpdateGraphics(mHackBase);
 		Sleep(200); // loop will only start again after 1/5 of a second
 	}
 }
@@ -91,3 +47,23 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 	}
 	return false;
 }
+
+
+/*samples */
+// MessageBox(0, "We are here hehe.", "nana...", 0);
+/*
+while (true) {
+UpdateDMAs();
+UpdateHacks();
+Sleep(10);
+}
+
+
+template<typename T>
+const bool WriteMem(const SIZE_T Address, const T value)
+{
+DWORD bytesRead;
+WriteProcessMemory(hProcess, (LPVOID)Address, &value, sizeof(T), &bytesRead);
+return bytesRead == sizeof(T);
+};
+*/

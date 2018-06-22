@@ -128,13 +128,10 @@
   <ItemGroup>
     <ClCompile Include="..\Hackbase\hotkey.cpp" />
     <ClCompile Include="..\HackBase\main.cpp" />
-    <ClCompile Include="..\Hackbase\memoryaccess.cpp" />
+    <ClCompile Include="..\HackBase\memoryaccess.cpp" />
     <ClCompile Include="..\Hackbase\trainergraphic.cpp" />
     <ClCompile Include="..\HackBase\trainerbase.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\HackBase\hotkey.h" />
-    <ClInclude Include="..\Hackbase\memoryaccess.h" />
+    <ClCompile Include="..\Hackbase\memoryaccess_afterkeydown.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
