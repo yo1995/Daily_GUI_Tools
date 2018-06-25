@@ -30,18 +30,26 @@ extern char score_judge_0[];
 extern char score_judge_1[];
 
 // time related
-extern char total_time_elapsed[];
-extern char game_time_elapsed[];
-extern char shot_triggered_time[];
+extern char total_time_elapsed_text[];
+extern char game_time_elapsed_text[];
+extern char shot_triggered_time_text[];
 
 // general flags for toggling.
 extern bool record_shot_chart_and_more;
 extern bool clear_screen;
 extern bool clear_screen_already_cleared;
 
+// shotchart related
+extern bool redraw_shotchart;	// if true, then read from vector and redraw; otherwise omit.
+extern float coordinate_x_100;
+extern float coordinate_y_100;
+extern float rim_dist;
+extern float shot_triggered_time;
+
 void onRender_clear(Renderer *renderer); 
 
 void onRender_dashboard(Renderer *renderer);
+void onRender_shotchart(Renderer *renderer);
 
 // void onRender_F7(Renderer *renderer) {};
 
@@ -49,6 +57,7 @@ void onRender_dashboard(Renderer *renderer);
 bool IsKeyDown(DWORD key);
 void UpdateHotkeys();
 // 读取判断值，读写内存数据，实现读取投篮数据/写入无敌模式
+void update_shot_coordinates(HANDLE pHandle);	// only used in sub, no need to put here
 void update_score_type(HANDLE pHandle);
 void change_god_mode(HANDLE pHandle);
 void UpdateDMAs(HANDLE pHandle);

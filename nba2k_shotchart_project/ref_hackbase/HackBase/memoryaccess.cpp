@@ -11,11 +11,11 @@
 // 0. the followings are for all courts. 
 DWORD exe_base_addr				= 0x00400000;	// nba2k11.exe»ùÖ·£¬²»ÖªµÀ»á²»»á±ä»¯¡£ºóÃæµÄµØÖ·¶¼ÊÇ»ùÖ·+Æ«ÒÆÁ¿ºóµÄµØÖ·¡£
 // e.g. single practice, blacktop street, shooting practice, etc. 
-DWORD score_type_addr			= 0x05D5FA70;	// ÇòÓëÀº¿ð¹ØÏµ£¬0Èý²»Õ´1ÔÒ¿ò2¿ÕË¢3´ò°å 5´óºÅ¿ÕË¢/Æ«³ö£¿ 7´óºÅÔÒ¿ò½ø/ÔÒ°åÉÏÑØ8µ¯¿ò¶ø³ö£¬¾­¹ýÔ²ÖùÌå
-DWORD score_judge_addr			= 0x05D5FA78;	// ½øÇòÅÐ¶Ï
-DWORD coordinate_x_100_addr		= 0x05d5f720;	// °Ù±¶ºá×ø±ê
-DWORD coordinate_y_100_addr		= 0x05d5f728;	// °Ù±¶×Ý×ø±ê
-DWORD absolute_dist_rim_addr	= 0x05d5f730;	// ¾àÀëÀº¿ð¾ø¶Ô¾àÀë
+DWORD score_type_addr			= 0x05D5FA70;	//  ÇòÓëÀº¿ð¹ØÏµ£¬0Èý²»Õ´1ÔÒ¿ò2¿ÕË¢3´ò°å 5´óºÅ¿ÕË¢/Æ«³ö£¿ 7´óºÅÔÒ¿ò½ø/ÔÒ°åÉÏÑØ8µ¯¿ò¶ø³ö£¬¾­¹ýÔ²ÖùÌå
+DWORD score_judge_addr			= 0x05D5FA78;	//  ½øÇòÅÐ¶Ï
+DWORD coordinate_x_100_addr		= 0x05d5f720;	//  °Ù±¶ºá×ø±ê
+DWORD coordinate_y_100_addr		= 0x05d5f728;	//  °Ù±¶×Ý×ø±ê
+DWORD absolute_dist_rim_addr	= 0x05d5f730;	//  ¾àÀëÀº¿ð¾ø¶Ô¾àÀë
 DWORD projected_percent_addr	= 0x05d5f738;	// Ô¤¼ÆÍ¶ÀºÃüÖÐÂÊ£¬¿É²Î¿¼ÒÔÌáÉýÍ¶ÀºÑ¡Ôñ
 DWORD shot_triggered_time_addr	= 0x05db028c;	// Í¶ÀºÊÍ·ÅÊ±¼ä£¬¼´°´ÏÂzÍ¶Àº¼üºó¼üÌ§ÆðµÄÊ±¼ä£¬¿ÉÓÃÓÚÅÐ¶ÏÊÇ·ñ¿ÛÀº£¬ÃëÊý
 DWORD total_time_elapsed_addr	= 0x05439C1C;	// ×ÜÁ÷ÊÅÊ±¼ä£¬°üÀ¨ÔÝÍ£±íÑÝµÈ£¬²»°üÀ¨escÓÎÏ·ÔÝÍ£
@@ -25,8 +25,16 @@ DWORD total_time_elapsed_addr	= 0x05439C1C;	// ×ÜÁ÷ÊÅÊ±¼ä£¬°üÀ¨ÔÝÍ£±íÑÝµÈ£¬²»°üÀ
 DWORD game_time_elapsed_addr	= 0x05544DF4;	// ±ÈÈüÁ÷ÊÅÊ±¼ä£¬½öÊÊÓÃÓÚ·Ö½Ú±ÈÈüµÄÄ£Ê½£¬ÃëÊý
 
 
+void update_shot_coordinates(HANDLE pHandle) {
+	ReadProcessMemory(pHandle, (LPVOID)coordinate_x_100_addr, &coordinate_x_100, sizeof(coordinate_x_100), 0);
+	ReadProcessMemory(pHandle, (LPVOID)coordinate_y_100_addr, &coordinate_y_100, sizeof(coordinate_y_100), 0);
+	ReadProcessMemory(pHandle, (LPVOID)absolute_dist_rim_addr, &rim_dist, sizeof(rim_dist), 0);
+}
 
 
+void update_shot_triggered_time(HANDLE pHandle) {
+	ReadProcessMemory(pHandle, (LPVOID)shot_triggered_time_addr, &shot_triggered_time, sizeof(shot_triggered_time), 0);
+}
 
 void update_score_type(HANDLE pHandle) {
 	ReadProcessMemory(pHandle, (LPVOID)score_type_addr, &score_type, sizeof(score_type), 0);
@@ -36,6 +44,19 @@ void update_score_type(HANDLE pHandle) {
 
 // only read from global flags and the handle for address
 void UpdateDMAs(HANDLE pHandle) {
+	float shot_time_temp = shot_triggered_time;
 	// aka direct memory access. manipulate the memory region.
 	update_score_type(pHandle);
+	update_shot_triggered_time(pHandle);
+	if (shot_time_temp != shot_triggered_time) {
+		// then we triggered a shot. update the x-ys
+		update_shot_coordinates(pHandle);
+		if (score_judge > 0) {
+			// made shot
+		}
+		else {
+			// missed shot
+		}
+		redraw_shotchart = true;	// serve as a lock to control the read from vector
+	}
 }

@@ -3,6 +3,9 @@
 int border_width = 2;
 int column_width = 280;
 int column_height = 45;
+int court_bg_x = 240;	// in pixels
+int court_bg_y = 225;
+int dot_size = 8;
 
 // F6 display data and coordinates
 // char* score_type_text;
@@ -35,9 +38,29 @@ bool made_shot_prediction = false;
 bool clear_screen = false;
 bool clear_screen_already_cleared = false;
 bool all_players_god_mode = false;
+bool redraw_shotchart = false;
+
+float coordinate_x_100 = 0;
+float coordinate_y_100 = 0;
+float rim_dist = 0;
+float shot_triggered_time = 0;
 
 void onRender_clear(Renderer *renderer) {
 	// by default we do not draw things on the screen. this is the default.
+}
+
+void onRender_shotchart(Renderer *renderer) {
+	// renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
+	int x_0 = renderer->GetWidth() - court_bg_x - border_width;
+	int y_0 = renderer->GetHeight() - court_bg_y - border_width;
+
+	// pass in a vector<missed, pair<x, y> >
+	// related with r/w mutex, cannot read when writing to the var. 
+	// maybe i can use a bool to serve as a lock? since bool is always thread safe...?
+	// missed
+	renderer->DrawRect(x_0 + 50, y_0 + 45, dot_size, dot_size, RED(255));
+	// scored
+	renderer->DrawRect(x_0 + 150, y_0 + 200, dot_size, dot_size, GREEN(255));
 }
 
 void onRender_dashboard(Renderer *renderer) {
@@ -59,7 +82,19 @@ void onRender_dashboard(Renderer *renderer) {
 	renderer->DrawText(border_width, 1 + border_width, FontColor_default, F7_text);
 	renderer->DrawText(border_width + column_width, 1 + border_width, FontColor_default, score_type_text);
 	renderer->DrawText(border_width + 2 * column_width, 1 + border_width, FontColor_default, score_judge_text);
+
+	// not sure with the design yet. just put it here first
+	// 目前是只绘制一帧，说明每一帧效率还是偏低。
+	// 希望改为直到下次信号时才更新的效果。
+	if (redraw_shotchart) {
+		renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
+		onRender_shotchart(renderer);
+		redraw_shotchart = false;	// reset the flag to wait until another shot, to save res.
+	}
+	
 }
+
+
 
 void UpdateBools() {
 	// 球筐类型判断

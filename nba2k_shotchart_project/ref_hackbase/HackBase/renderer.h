@@ -8,6 +8,7 @@ class Renderer {
 public:
 	virtual void BeginScene() = 0;
 	virtual void EndScene() = 0;
+	virtual void DrawPic(int x, int y) = 0;
 	virtual void DrawRect(int x, int y, int w, int h, Color color) = 0;
 	virtual void DrawBorder(int x, int y, int w, int h, int d, Color color) = 0;
 	virtual void DrawLine(float x1, float y1, float x2, float y2, int size, bool antialias, Color color) = 0;

@@ -7,6 +7,8 @@
 #define LOGTOFILE "C:\\Chen\\log.txt"
 #define DEBUGLOG
 
+#define COURT_BG "C:\\Chen\\court0.png"
+
 #ifdef PUBLISHEDVERSION
 #define LOGTOCONSOLE
 #undef LOGTOFILE

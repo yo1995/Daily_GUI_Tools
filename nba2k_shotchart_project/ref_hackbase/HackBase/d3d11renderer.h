@@ -33,6 +33,7 @@ public:
 	void BeginScene();
 	void EndScene();
 	void RefreshData(IDXGISwapChain *SwapChain);
+	void DrawPic(int x, int y) {}; // if needed implement later
 	void DrawRect(int x, int y, int w, int h, Color color);
 	void DrawBorder(int x, int y, int w, int h, int d, Color color);
 	void DrawLine(float x1, float y1, float x2, float y2, int size, bool antialias, Color color) {};

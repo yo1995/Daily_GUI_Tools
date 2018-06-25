@@ -1,7 +1,5 @@
 #include "hackbase.h"
 
-
-
 D3D9Renderer::D3D9Renderer(IDirect3DDevice9 *Device) {
 	this->pDevice = Device;
 }
@@ -20,6 +18,25 @@ void D3D9Renderer::RefreshData(IDirect3DDevice9 *Device) {
 	}
 }
 
+void D3D9Renderer::DrawPic(int x, int y) {
+	static IDirect3DTexture9 *Texture_Interface;
+	static ID3DXSprite *Sprite_Interface;
+	//if (!Texture_Interface) {
+	D3DXCreateTextureFromFileA(pDevice, COURT_BG, &Texture_Interface);	// defined in header
+	//}
+	//if (!Sprite_Interface) {
+	D3DXCreateSprite(pDevice, &Sprite_Interface);
+	//}
+	D3DXVECTOR3 Position;
+	Position.x = x;
+	Position.y = y;
+	Sprite_Interface->Begin(D3DXSPRITE_ALPHABLEND);
+	Sprite_Interface->Draw(Texture_Interface, NULL, NULL, &Position, 0xFFFFFFFF);
+	Sprite_Interface->End();
+	Sprite_Interface->Release();
+}
+
+
 void D3D9Renderer::DrawRect(int x, int y, int w, int h, Color color) {
 	if(this->pDevice) {
 		D3DRECT rec = {x, y, x + w, y + h};
@@ -36,36 +53,36 @@ void D3D9Renderer::DrawBorder(int x, int y, int w, int h, int d, Color color) {
 }
 
 void D3D9Renderer::DrawLine(float x1, float y1, float x2, float y2, int width, bool antialias, Color color) {
-	// dont actually need to draw an angled line. might implement in the future.
-	ID3DXLine *m_Line;
-	D3DXCreateLine(pDevice, &m_Line); // this one depends on d3dx9.lib which should be deprecated. change in the future?
+	static ID3DXLine *mLine;
+	D3DXCreateLine(pDevice, &mLine); // this one depends on d3dx9.lib which should be deprecated. change in the future?
 	D3DXVECTOR2 line[] = { D3DXVECTOR2(x1, y1), D3DXVECTOR2(x2, y2) };
-	m_Line->SetWidth((float)width);
+	mLine->SetWidth((float)width);
 	//if (antialias) 
 	//  m_Line->SetAntialias(1);
-	m_Line->Begin();
-	m_Line->Draw(line, 2, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
-	m_Line->End();
-	m_Line->Release();
+	mLine->Begin();
+	mLine->Draw(line, 2, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
+	mLine->End();
+	mLine->Release();
 }
 
 
 bool D3D9Renderer::CreateFont() {
-	if (!Imports::Singleton())
-		return false;
-	if (!Imports::Singleton()->D3DXCreateFont)
-		return false;
-	if (FAILED(Imports::Singleton()->D3DXCreateFont(pDevice, FontSize_default, 0, FontWeight_default, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &(this->mFont))))
+	// obsolete
+	/*
+	if (!Imports::Singleton()) return false;
+	if (!Imports::Singleton()->D3DXCreateFont) return false;
+	if (FAILED(Imports::Singleton()->D3DXCreateFont(pDevice, FontSize_default, 0, FontWeight_default, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &mFont)))
 		return false;
 	return true;
+	*/
 }
 
 
 void D3D9Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
-	if (!Text)
-		return;
-	if (!this->CreateFont())
-		return;
+	if (!Text) return;
+	static ID3DXFont *mFont;
+	D3DXCreateFont(pDevice, FontSize_default, 0, FontWeight_default, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &mFont);
+	// if (!this->CreateFont()) return;
 	char buf[1024];
 	va_list arglist;
 	va_start(arglist, Text);
