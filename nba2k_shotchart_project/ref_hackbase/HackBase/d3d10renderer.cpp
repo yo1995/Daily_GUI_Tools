@@ -166,7 +166,7 @@ void D3D10Renderer::DrawCircle(int x, int y, float radius, int width, UINT sampl
 	}
 }
 
-void D3D10Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
+void D3D10Renderer::DrawTxt(int x, int y, Color color, char *Text, ...) {
 	if(!Text)
 		return;
 

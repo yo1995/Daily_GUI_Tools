@@ -12,6 +12,7 @@ typedef HRESULT (__stdcall* myD3D10CreateEffectFromMemory)(void *pData, SIZE_T D
 typedef HRESULT (__stdcall* myD3D10CreateStateBlock)(ID3D10Device *pDevice, D3D10_STATE_BLOCK_MASK *pStateBlockMask, ID3D10StateBlock **ppStateBlock);
 typedef HRESULT (__stdcall* myD3D10StateBlockMaskEnableAll)(D3D10_STATE_BLOCK_MASK *pMask);
 typedef HRESULT (__stdcall* myD3DX10CreateFont)(ID3D10Device *pDevice, INT Height, UINT Width, UINT Weight, UINT MipLevels, BOOL Italic, UINT CharSet, UINT OutputPrecision, UINT Quality, UINT PitchAndFamily, LPCTSTR pFaceName, LPD3DX10FONT *ppFont);
+typedef HRESULT (__stdcall* myD3DXCreateTextureFromFile)(IDirect3DDevice9 *pDevice, LPCTSTR pSrcFile, LPDIRECT3DTEXTURE9 *ppTexture);
 
 class Imports {
 private:
@@ -30,6 +31,7 @@ public:
 	myD3D10CreateStateBlock D3D10CreateStateBlock;
 	myD3D10StateBlockMaskEnableAll D3D10StateBlockMaskEnableAll;
 	myD3DX10CreateFont D3DX10CreateFont;
+	myD3DXCreateTextureFromFile D3DXCreateTextureFromFileA;
 };
 
 #endif

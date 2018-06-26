@@ -98,7 +98,6 @@
     <ClInclude Include="encryption.h" />
     <ClInclude Include="hackbase.h" />
     <ClInclude Include="imports.h" />
-    <ClInclude Include="keyboardhook.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="string.h" />

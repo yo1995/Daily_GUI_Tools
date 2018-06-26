@@ -29,6 +29,7 @@ HRESULT __stdcall hkD3D9EndScene(IDirect3DDevice9 *pDevice) {
 		if(mD3D9Base) {
 			mD3D9Base->setD3DVersion(D3DVersion_D3D9);
 			mD3D9Base->setRenderer(new D3D9Renderer(pDevice));
+			// mD3D9Base->getRenderer()->InitCreateFuncs();
 		}
 	} else {
 		if(mD3D9Base->getRenderer()) {
@@ -40,9 +41,10 @@ HRESULT __stdcall hkD3D9EndScene(IDirect3DDevice9 *pDevice) {
 				mD3D9Base->mOnRender(mD3D9Base->getRenderer());
 			
 			mD3D9Base->getRenderer()->EndScene();
+			
 		} else {
 			dbglogln("Unable to render: Renderer == NULL");
-			MessageBox(0, "Error!", "", 0);
+			MessageBox(0, "Error! Unable to render.", "", 0);
 			ExitProcess(0);
 		}
 	}

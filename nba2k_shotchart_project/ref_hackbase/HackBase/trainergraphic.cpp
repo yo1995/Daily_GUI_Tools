@@ -64,6 +64,7 @@ void onRender_shotchart(Renderer *renderer) {
 }
 
 void onRender_dashboard(Renderer *renderer) {
+	//renderer->InitCreateFuncs();
 	// draw rect background
 	/*
 	renderer->DrawRect(0, 0, 1 * column_width, column_height, GRAY(64));
@@ -78,17 +79,16 @@ void onRender_dashboard(Renderer *renderer) {
 	// renderer->DrawBorder(0, 0, 4 * column_width, column_height, border_width, GREEN(255));
 	// draw text
 	
-
-	renderer->DrawText(border_width, 1 + border_width, FontColor_default, F7_text);
-	renderer->DrawText(border_width + column_width, 1 + border_width, FontColor_default, score_type_text);
-	renderer->DrawText(border_width + 2 * column_width, 1 + border_width, FontColor_default, score_judge_text);
+	renderer->DrawTxt(border_width, 1 + border_width, FontColor_default, F7_text);
+	renderer->DrawTxt(border_width + column_width, 1 + border_width, FontColor_default, score_type_text);
+	renderer->DrawTxt(border_width + 2 * column_width, 1 + border_width, FontColor_default, score_judge_text);
 
 	// not sure with the design yet. just put it here first
 	// 目前是只绘制一帧，说明每一帧效率还是偏低。
 	// 希望改为直到下次信号时才更新的效果。
+	renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
+	onRender_shotchart(renderer);
 	if (redraw_shotchart) {
-		renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
-		onRender_shotchart(renderer);
 		redraw_shotchart = false;	// reset the flag to wait until another shot, to save res.
 	}
 	
@@ -133,6 +133,7 @@ void UpdateBools() {
 // only read from global flags and the render handle for graphic
 void UpdateGraphics(HackBase *mHackBase) {
 	UpdateBools();
+
 	if (clear_screen && clear_screen_already_cleared) {
 		return;
 	}

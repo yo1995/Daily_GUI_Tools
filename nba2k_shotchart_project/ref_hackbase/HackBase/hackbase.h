@@ -148,12 +148,21 @@ typedef std::vector<String> StringVector;
 #define FontWeight_default FW_BOLD // FW_NORMAL FW_BOLD
 #pragma endregion
 
+/*
+extern LPDIRECT3DTEXTURE9 Texture_Interface;
+extern LPD3DXSPRITE Sprite_Interface;
+extern LPD3DXLINE mLine;
+extern LPD3DXFONT mFont;
+*/
+
 class HackBase {
 private:
 	HWND mConsoleWindow;
 	D3DVersion mD3DVersion;
 	Imports *mImports;
 	Renderer *mRenderer;
+
+
 
 	HackBase();
 

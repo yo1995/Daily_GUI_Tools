@@ -1,11 +1,43 @@
 #include "hackbase.h"
 
+/*
+definitions
+
+LPDIRECT3DTEXTURE9 Texture_Interface;
+LPD3DXSPRITE Sprite_Interface;
+LPD3DXLINE mLine;
+LPD3DXFONT mFont;
+*/
+
 D3D9Renderer::D3D9Renderer(IDirect3DDevice9 *Device) {
 	this->pDevice = Device;
+	mFont = NULL;
+	mLine = NULL;
+	Texture_Interface = NULL;
+	Sprite_Interface = NULL;
+	// will improve error handling here
+	/*
+	if () {
+#ifdef DEBUGLOG
+		logln("D3D9Renderer::InitCreateFunc failed!");
+#endif
+	}
+	*/
+	this->InitCreateFuncs();
 }
 
 D3D9Renderer::~D3D9Renderer() {
 	SAFE_RELEASE(this->pDevice);
+}
+
+void D3D9Renderer::InitCreateFuncs() {
+	// since the texture is not everchanging, just init once and voila!
+	if (FAILED(D3DXCreateTextureFromFileA(this->pDevice, COURT_BG, &Texture_Interface)))
+		MessageBox(0, "fail D3DXCreateTextureFromFile", "", 0);	// defined in header
+	D3DXCreateSprite(this->pDevice, &Sprite_Interface);
+	D3DXCreateLine(this->pDevice, &mLine); // this one depends on d3dx9.lib which should be deprecated. change in the future?
+	if (FAILED(D3DXCreateFontA(this->pDevice, FontSize_default, 0, FontWeight_default, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &mFont)))
+		MessageBox(0, "fail D3DXCreateFontA", "", 0);
 }
 
 void D3D9Renderer::RefreshData(IDirect3DDevice9 *Device) {
@@ -19,21 +51,15 @@ void D3D9Renderer::RefreshData(IDirect3DDevice9 *Device) {
 }
 
 void D3D9Renderer::DrawPic(int x, int y) {
-	static IDirect3DTexture9 *Texture_Interface;
-	static ID3DXSprite *Sprite_Interface;
-	//if (!Texture_Interface) {
-	D3DXCreateTextureFromFileA(pDevice, COURT_BG, &Texture_Interface);	// defined in header
-	//}
-	//if (!Sprite_Interface) {
-	D3DXCreateSprite(pDevice, &Sprite_Interface);
-	//}
+	//D3DXCreateTextureFromFileA(this->pDevice, COURT_BG, &Texture_Interface);
+	//D3DXCreateSprite(this->pDevice, &Sprite_Interface);
 	D3DXVECTOR3 Position;
 	Position.x = x;
 	Position.y = y;
 	Sprite_Interface->Begin(D3DXSPRITE_ALPHABLEND);
 	Sprite_Interface->Draw(Texture_Interface, NULL, NULL, &Position, 0xFFFFFFFF);
 	Sprite_Interface->End();
-	Sprite_Interface->Release();
+	// Sprite_Interface->Release();	// if want to change the texture several times, un-comment those u know.
 }
 
 
@@ -53,8 +79,7 @@ void D3D9Renderer::DrawBorder(int x, int y, int w, int h, int d, Color color) {
 }
 
 void D3D9Renderer::DrawLine(float x1, float y1, float x2, float y2, int width, bool antialias, Color color) {
-	static ID3DXLine *mLine;
-	D3DXCreateLine(pDevice, &mLine); // this one depends on d3dx9.lib which should be deprecated. change in the future?
+	//D3DXCreateLine(this->pDevice, &mLine); // this one depends on d3dx9.lib which should be deprecated. change in the future?
 	D3DXVECTOR2 line[] = { D3DXVECTOR2(x1, y1), D3DXVECTOR2(x2, y2) };
 	mLine->SetWidth((float)width);
 	//if (antialias) 
@@ -62,7 +87,7 @@ void D3D9Renderer::DrawLine(float x1, float y1, float x2, float y2, int width, b
 	mLine->Begin();
 	mLine->Draw(line, 2, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
 	mLine->End();
-	mLine->Release();
+	// mLine->Release();
 }
 
 
@@ -78,10 +103,10 @@ bool D3D9Renderer::CreateFont() {
 }
 
 
-void D3D9Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
+void D3D9Renderer::DrawTxt(int x, int y, Color color, char *Text, ...) {
 	if (!Text) return;
-	static ID3DXFont *mFont;
-	D3DXCreateFont(pDevice, FontSize_default, 0, FontWeight_default, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &mFont);
+	// D3DXCreateFont(this->pDevice, FontSize_default, 0, FontWeight_default, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FontFamily_default, &mFont);
+
 	// if (!this->CreateFont()) return;
 	char buf[1024];
 	va_list arglist;
@@ -89,6 +114,7 @@ void D3D9Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
 	vsprintf_s(buf, 1023, Text, arglist);
 	va_end(arglist);
 	RECT rect;
+	
 	switch (text_alignment_default) {
 		case lefted:
 			SetRect(&rect, x, y, x, y);
@@ -104,7 +130,7 @@ void D3D9Renderer::DrawText(int x, int y, Color color, char *Text, ...) {
 			break;
 	}
 	// mFont->DrawText(NULL, buf, strlen(buf), &rcScreen, DT_CENTER, D3DCOLOR_ARGB(color.a, color.r, color.g, color.b));
-	mFont->Release();
+	// mFont->Release();
 }
 
 void D3D9Renderer::DrawCircle(int x, int y, float radius, int width, UINT samples, Color color) {

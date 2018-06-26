@@ -47,9 +47,6 @@
     <ClInclude Include="dxgihook.h">
       <Filter>hook</Filter>
     </ClInclude>
-    <ClInclude Include="keyboardhook.h">
-      <Filter>hook</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tools.cpp">
