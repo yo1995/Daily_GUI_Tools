@@ -133,6 +133,9 @@
     <ClCompile Include="..\HackBase\trainerbase.h" />
     <ClCompile Include="..\Hackbase\memoryaccess_afterkeydown.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\HackBase\minicsv.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

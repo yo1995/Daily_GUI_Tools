@@ -8,6 +8,7 @@ therefore I just implement a rather verbose/inefficient snippet to achieve our d
 OMG WTH for several time i just wanted to refactor the whole piece of s**t! so convoluted!
 */
 #include "hackbase.h"
+#include "minicsv.h"
 
 // F7 was dedicated to be toggle of god mode.
 extern char* F7_text;
@@ -45,6 +46,8 @@ extern float coordinate_x_100;
 extern float coordinate_y_100;
 extern float rim_dist;
 extern float shot_triggered_time;
+extern bool is_a_dunk;
+extern bool made_shot_Z_down;
 
 void onRender_clear(Renderer *renderer); 
 
@@ -54,12 +57,14 @@ void onRender_shotchart(Renderer *renderer);
 // void onRender_F7(Renderer *renderer) {};
 
 // 读写判断值，读写显示字符串，实现开关模式
+void SaveDataFileHeader();
 bool IsKeyDown(DWORD key);
 void UpdateHotkeys();
 // 读取判断值，读写内存数据，实现读取投篮数据/写入无敌模式
 void update_shot_coordinates(HANDLE pHandle);	// only used in sub, no need to put here
 void update_score_type(HANDLE pHandle);
 void change_god_mode(HANDLE pHandle);
+void SaveDataFileLines();
 void UpdateDMAs(HANDLE pHandle);
 void UpdateDMA_afterKeyDown(HANDLE pHandle_r, HANDLE pHandle_w);
 // 读取判断值，绘制屏幕

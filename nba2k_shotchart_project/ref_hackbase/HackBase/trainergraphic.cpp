@@ -39,6 +39,7 @@ bool clear_screen = false;
 bool clear_screen_already_cleared = false;
 bool all_players_god_mode = false;
 bool redraw_shotchart = false;
+bool is_a_dunk = false;
 
 float coordinate_x_100 = 0;
 float coordinate_y_100 = 0;
@@ -52,25 +53,38 @@ void onRender_clear(Renderer *renderer) {
 void onRender_shotchart(Renderer *renderer) {
 	// the bg is rotated 90 deg, therefore flip
 	int x_0 = renderer->GetWidth() - 0.5 * court_bg_x;
-	int y_0 = renderer->GetHeight();
-	float ratio = court_bg_x / 1500.0f;	// 1500*1410
-	// windowed mode have borders and offsets
-	renderer->DrawPic((renderer->GetWidth() - court_bg_x - 8 * border_width), (renderer->GetHeight() - court_bg_y - 16 * border_width));
-	if (score_judge) { // scored
-		renderer->DrawRect(x_0 - coordinate_y_100 * ratio - 1, y_0 - coordinate_x_100 * ratio - 1, dot_size, dot_size, GREEN(255));
-	}
-	else {	// missed
-		renderer->DrawRect(x_0 - coordinate_y_100 * ratio - 1, y_0 - coordinate_x_100 * ratio - 1, dot_size, dot_size, RED(255));
-	}
-	// renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
-	
+	int y_0 = renderer->GetHeight() - court_bg_y;
+	float ratioy = court_bg_x / 1500.0f;	// 1500*1410
+	float ratiox = court_bg_y / 1440.0f;
+	// flip x-y coordinate if x < 0 (court change in quarters - actually no need)
+	// what about backcourt scorers?
 
+
+	// windowed mode have borders and offsets
+	renderer->DrawPic((renderer->GetWidth() - court_bg_x - 8 * border_width), (renderer->GetHeight() - court_bg_y - 15 * border_width));
+	if (redraw_shotchart) {	// means that i'm not writing into the coordinates
+		if (is_a_dunk) {
+			if (score_judge) { // scored
+				renderer->DrawRect((renderer->GetWidth() + court_bg_x + 8 * border_width + 118), (renderer->GetHeight() + court_bg_y + 15 * border_width + 26), dot_size, dot_size, GREEN(255));
+			}
+			else {	// missed
+				renderer->DrawRect((renderer->GetWidth() + court_bg_x + 8 * border_width + 118), (renderer->GetHeight() + court_bg_y + 15 * border_width + 26), dot_size, dot_size, RED(255));
+			}
+			//120, 26 is the coord of basket
+		}
+		else {
+			if (score_judge) { // scored
+				renderer->DrawRect(x_0 + coordinate_y_100 * ratioy + 1, y_0 + coordinate_x_100 * ratiox + 1, dot_size, dot_size, GREEN(255));
+			}
+			else {	// missed
+				renderer->DrawRect(x_0 + coordinate_y_100 * ratioy + 1, y_0 + coordinate_x_100 * ratiox + 1, dot_size, dot_size, RED(255));
+			}
+		}
+	}
+		
 	// pass in a vector<missed, pair<x, y> >
 	// related with r/w mutex, cannot read when writing to the var. 
 	// maybe i can use a bool to serve as a lock? since bool is always thread safe...?
-	
-	
-	
 	
 }
 
@@ -94,6 +108,7 @@ void onRender_dashboard(Renderer *renderer) {
 	renderer->DrawTxt(border_width + column_width, 1 + border_width, FontColor_default, score_type_text);
 	renderer->DrawTxt(border_width + 2 * column_width, 1 + border_width, FontColor_default, score_judge_text);
 
+	/* do not need to expose the raw data to regular users.
 	char temp_str[255];
 	sprintf_s(temp_str, "%.2f", coordinate_x_100); //将100转为16进制表示的字符串。
 	renderer->DrawTxt(border_width, column_height + border_width, FontColor_default, temp_str);
@@ -101,16 +116,9 @@ void onRender_dashboard(Renderer *renderer) {
 	renderer->DrawTxt(border_width + column_width, column_height + border_width, FontColor_default, temp_str);
 	sprintf_s(temp_str, "%.2f", rim_dist);
 	renderer->DrawTxt(border_width + 2 * column_width, column_height + border_width, FontColor_default, temp_str);
+	*/
 
-	// not sure with the design yet. just put it here first
-	// 目前是只绘制一帧，说明每一帧效率还是偏低。
-	// 希望改为直到下次信号时才更新的效果。
-	//
 	onRender_shotchart(renderer);
-	if (redraw_shotchart) {
-		redraw_shotchart = false;	// reset the flag to wait until another shot, to save res.
-	}
-	
 }
 
 

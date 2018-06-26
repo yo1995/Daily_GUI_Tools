@@ -1,11 +1,12 @@
 ﻿#pragma comment (lib, "..\\Release\\HackBase.lib")
-#pragma comment(lib, "d3dx9.lib") // for the helly Drawline function.
+#pragma comment(lib, "d3dx9.lib") // for the helly Drawline function. actually no need, improve later
 
 #include "hackbase.h"
 #include "trainerbase.h"
 
 HackBase *mHackBase = 0;
-char inject_text[] = "injected and hooked by yo1995.";
+
+
 
 
 void init_main() {
@@ -28,8 +29,9 @@ void init_main() {
 		return;
 	}
 	while (true) { //infinite loop! might affect the performance.
-		UpdateHotkeys();
 		UpdateDMAs(pHandle_r);
+		// keys after dma cause we need to depend on Z down
+		UpdateHotkeys();
 		UpdateDMA_afterKeyDown(pHandle_r, pHandle_w);
 		UpdateGraphics(mHackBase);
 		Sleep(200); // loop will only start again after 1/5 of a second
