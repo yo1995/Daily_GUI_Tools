@@ -50,17 +50,26 @@ void onRender_clear(Renderer *renderer) {
 }
 
 void onRender_shotchart(Renderer *renderer) {
-	// renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
+	// the bg is rotated 90 deg, therefore flip
 	int x_0 = renderer->GetWidth() - court_bg_x - border_width;
 	int y_0 = renderer->GetHeight() - court_bg_y - border_width;
+	float ratio = court_bg_x / 1500.0f;	// 1500*1410
+	if (score_judge) { // scored
+		renderer->DrawRect(x_0 + coordinate_y_100 * ratio, y_0 + coordinate_x_100 * ratio, dot_size, dot_size, GREEN(255));
+	}
+	else {	// missed
+		renderer->DrawRect(x_0 + coordinate_y_100 * ratio, y_0 + coordinate_x_100 * ratio, dot_size, dot_size, RED(255));
+	}
+	// renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
+	
 
 	// pass in a vector<missed, pair<x, y> >
 	// related with r/w mutex, cannot read when writing to the var. 
 	// maybe i can use a bool to serve as a lock? since bool is always thread safe...?
-	// missed
-	renderer->DrawRect(x_0 + 50, y_0 + 45, dot_size, dot_size, RED(255));
-	// scored
-	renderer->DrawRect(x_0 + 150, y_0 + 200, dot_size, dot_size, GREEN(255));
+	
+	
+	
+	
 }
 
 void onRender_dashboard(Renderer *renderer) {
@@ -82,6 +91,14 @@ void onRender_dashboard(Renderer *renderer) {
 	renderer->DrawTxt(border_width, 1 + border_width, FontColor_default, F7_text);
 	renderer->DrawTxt(border_width + column_width, 1 + border_width, FontColor_default, score_type_text);
 	renderer->DrawTxt(border_width + 2 * column_width, 1 + border_width, FontColor_default, score_judge_text);
+
+	char temp_str[255];
+	sprintf_s(temp_str, "%.2f", coordinate_x_100); //将100转为16进制表示的字符串。
+	renderer->DrawTxt(border_width, column_height + border_width, FontColor_default, temp_str);
+	sprintf_s(temp_str, "%.2f", coordinate_y_100);
+	renderer->DrawTxt(border_width + column_width, column_height + border_width, FontColor_default, temp_str);
+	sprintf_s(temp_str, "%.2f", rim_dist);
+	renderer->DrawTxt(border_width + 2 * column_width, column_height + border_width, FontColor_default, temp_str);
 
 	// not sure with the design yet. just put it here first
 	// 目前是只绘制一帧，说明每一帧效率还是偏低。

@@ -13,8 +13,8 @@ DWORD exe_base_addr				= 0x00400000;	// nba2k11.exe»ùÖ·£¬²»ÖªµÀ»á²»»á±ä»¯¡£ºóÃæµ
 // e.g. single practice, blacktop street, shooting practice, etc. 
 DWORD score_type_addr			= 0x05D5FA70;	//  ÇòÓëÀº¿ð¹ØÏµ£¬0Èý²»Õ´1ÔÒ¿ò2¿ÕË¢3´ò°å 5´óºÅ¿ÕË¢/Æ«³ö£¿ 7´óºÅÔÒ¿ò½ø/ÔÒ°åÉÏÑØ8µ¯¿ò¶ø³ö£¬¾­¹ýÔ²ÖùÌå
 DWORD score_judge_addr			= 0x05D5FA78;	//  ½øÇòÅÐ¶Ï
-DWORD coordinate_x_100_addr		= 0x05d5f720;	//  °Ù±¶ºá×ø±ê
-DWORD coordinate_y_100_addr		= 0x05d5f728;	//  °Ù±¶×Ý×ø±ê
+DWORD coordinate_x_100_addr		= 0x05d5f728;	//  °Ù±¶ºá×ø±ê - ½âËµÊÓ½Ç×ø±êÏµ
+DWORD coordinate_y_100_addr		= 0x05d5f720;	//  °Ù±¶×Ý×ø±ê
 DWORD absolute_dist_rim_addr	= 0x05d5f730;	//  ¾àÀëÀº¿ð¾ø¶Ô¾àÀë
 DWORD projected_percent_addr	= 0x05d5f738;	// Ô¤¼ÆÍ¶ÀºÃüÖÐÂÊ£¬¿É²Î¿¼ÒÔÌáÉýÍ¶ÀºÑ¡Ôñ
 DWORD shot_triggered_time_addr	= 0x05db028c;	// Í¶ÀºÊÍ·ÅÊ±¼ä£¬¼´°´ÏÂzÍ¶Àº¼üºó¼üÌ§ÆðµÄÊ±¼ä£¬¿ÉÓÃÓÚÅÐ¶ÏÊÇ·ñ¿ÛÀº£¬ÃëÊý
@@ -51,12 +51,7 @@ void UpdateDMAs(HANDLE pHandle) {
 	if (shot_time_temp != shot_triggered_time) {
 		// then we triggered a shot. update the x-ys
 		update_shot_coordinates(pHandle);
-		if (score_judge > 0) {
-			// made shot
-		}
-		else {
-			// missed shot
-		}
+		
 		redraw_shotchart = true;	// serve as a lock to control the read from vector
 	}
 }

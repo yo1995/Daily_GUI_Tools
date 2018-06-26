@@ -134,7 +134,7 @@ void D3D9Renderer::DrawTxt(int x, int y, Color color, char *Text, ...) {
 }
 
 void D3D9Renderer::DrawCircle(int x, int y, float radius, int width, UINT samples, Color color) {
-	float Angle = (2.0f * PI) / samples; //to radians
+	float Angle = (2.0f * PI) / samples; // to radians
 
 	float Cos = cos(Angle);
 	float Sin = sin(Angle);

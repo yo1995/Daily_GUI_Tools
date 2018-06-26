@@ -66,4 +66,6 @@ void UpdateDMA_afterKeyDown(HANDLE pHandle_r, HANDLE pHandle_w);
 void UpdateBools();
 void UpdateGraphics(HackBase *mHackBase);
 
+
+
 #endif
