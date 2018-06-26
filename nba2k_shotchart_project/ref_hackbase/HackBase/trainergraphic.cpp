@@ -51,14 +51,16 @@ void onRender_clear(Renderer *renderer) {
 
 void onRender_shotchart(Renderer *renderer) {
 	// the bg is rotated 90 deg, therefore flip
-	int x_0 = renderer->GetWidth() - court_bg_x - border_width;
-	int y_0 = renderer->GetHeight() - court_bg_y - border_width;
+	int x_0 = renderer->GetWidth() - 0.5 * court_bg_x;
+	int y_0 = renderer->GetHeight();
 	float ratio = court_bg_x / 1500.0f;	// 1500*1410
+	// windowed mode have borders and offsets
+	renderer->DrawPic((renderer->GetWidth() - court_bg_x - 8 * border_width), (renderer->GetHeight() - court_bg_y - 16 * border_width));
 	if (score_judge) { // scored
-		renderer->DrawRect(x_0 + coordinate_y_100 * ratio, y_0 + coordinate_x_100 * ratio, dot_size, dot_size, GREEN(255));
+		renderer->DrawRect(x_0 - coordinate_y_100 * ratio - 1, y_0 - coordinate_x_100 * ratio - 1, dot_size, dot_size, GREEN(255));
 	}
 	else {	// missed
-		renderer->DrawRect(x_0 + coordinate_y_100 * ratio, y_0 + coordinate_x_100 * ratio, dot_size, dot_size, RED(255));
+		renderer->DrawRect(x_0 - coordinate_y_100 * ratio - 1, y_0 - coordinate_x_100 * ratio - 1, dot_size, dot_size, RED(255));
 	}
 	// renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
 	
@@ -103,7 +105,7 @@ void onRender_dashboard(Renderer *renderer) {
 	// not sure with the design yet. just put it here first
 	// 目前是只绘制一帧，说明每一帧效率还是偏低。
 	// 希望改为直到下次信号时才更新的效果。
-	renderer->DrawPic(renderer->GetWidth() - court_bg_x - border_width, renderer->GetHeight() - court_bg_y - border_width);
+	//
 	onRender_shotchart(renderer);
 	if (redraw_shotchart) {
 		redraw_shotchart = false;	// reset the flag to wait until another shot, to save res.
