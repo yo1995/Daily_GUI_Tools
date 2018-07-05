@@ -10,6 +10,8 @@ OMG WTH for several time i just wanted to refactor the whole piece of s**t! so c
 #include "hackbase.h"
 #include "minicsv.h"
 
+#define VERBOSEMODE false
+
 // F7 was dedicated to be toggle of god mode.
 extern char* F7_text;
 extern char F7_text_f[];
@@ -71,6 +73,12 @@ void UpdateDMA_afterKeyDown(HANDLE pHandle_r, HANDLE pHandle_w);
 void UpdateBools();
 void UpdateGraphics(HackBase *mHackBase);
 
+
+// dll hijacking
+typedef void* (WINAPI* Direct3DCreate9Type)(UINT SDKVersion);
+extern Direct3DCreate9Type RealDirect3DCreate9;
+#include <SDKDDKVer.h>
+#include <tchar.h>
 
 
 #endif

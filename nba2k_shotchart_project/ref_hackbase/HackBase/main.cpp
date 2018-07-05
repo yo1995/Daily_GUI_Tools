@@ -5,11 +5,30 @@
 #include "trainerbase.h"
 
 HackBase *mHackBase = 0;
+HMODULE g_d3d9Module = NULL;
 
-
-
+bool d3d9hijack(HMODULE hModule) {
+	TCHAR processPath[MAX_PATH];
+	TCHAR msg[MAX_PATH + 20];
+	GetModuleFileName(GetModuleHandle(NULL), processPath, MAX_PATH);
+	if (VERBOSEMODE) {
+		_tcscpy_s(msg, _T("注入了进程 "));
+		_tcscat_s(msg, processPath);
+		MessageBox(NULL, msg, _T(""), MB_OK);
+	}
+	// 加载原DLL，获取真正的Direct3DCreate9地址
+	g_d3d9Module = LoadLibrary(_T("C:\\Windows\\System32\\d3d9.dll"));
+	RealDirect3DCreate9 = (Direct3DCreate9Type)GetProcAddress(g_d3d9Module, "Direct3DCreate9");
+	if (RealDirect3DCreate9 == NULL)
+	{
+		MessageBox(NULL, _T("获取Direct3DCreate9地址失败"), _T("Error"), MB_ICONERROR);
+		return false;
+	}
+	return true;
+}
 
 void init_main() {
+	Sleep(8000);  // a silly way to load my trainer after game itself initialized.
 	char exename[] = "nba2k11.exe"; //GFXTest32.exe nba2k11.exe
 	char windowname[] = "NBA 2K11"; //Renderer: [DirectX9], Input: [Raw input], 32 bits  NBA 2K11
 	mHackBase = HackBase::Singleton();
@@ -28,6 +47,7 @@ void init_main() {
 		MessageBox(0, "Error Finding Window.", "Window mismatch!", MB_ICONERROR);
 		return;
 	}
+	
 	while (true) { //infinite loop! might affect the performance.
 		UpdateDMAs(pHandle_r);
 		// keys after dma cause we need to depend on Z down
@@ -38,16 +58,32 @@ void init_main() {
 	}
 }
 
+BOOL InitInstance(HMODULE hModule) {
+	if (!d3d9hijack(hModule)) {
+		MessageBox(0, "d3d9 DLL hijack failed!", "Error", MB_ICONERROR);
+		return false;
+	}
+	return true;
+}
+
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 	switch (fdwReason) {
-	case DLL_PROCESS_ATTACH:
-		CreateThread(0, 0, (LPTHREAD_START_ROUTINE)init_main, 0, 0, 0);
-		return true;
-	case DLL_PROCESS_DETACH:
-		SAFE_DELETE(mHackBase);
-		return true;
+		case DLL_PROCESS_ATTACH:
+			DisableThreadLibraryCalls(hinstDLL);
+			if (!InitInstance(hinstDLL)) {
+				return false;
+			};
+			CreateThread(0, 0, (LPTHREAD_START_ROUTINE)init_main, 0, 0, 0);
+			break;
+		case DLL_PROCESS_DETACH:
+			SAFE_DELETE(mHackBase);
+			if (VERBOSEMODE) {
+				MessageBox(NULL, _T("DLL卸载中"), _T(""), MB_OK);
+			}
+			FreeLibrary(g_d3d9Module);
+			break;
 	}
-	return false;
+	return true;
 }
 
 

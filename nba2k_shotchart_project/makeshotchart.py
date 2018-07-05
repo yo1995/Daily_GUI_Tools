@@ -1,14 +1,15 @@
 import csv
-import plotly
+
 import plotly.graph_objs as go
 from plotly.offline import init_notebook_mode, plot
 import base64
 
-# init_notebook_mode(connected=True)
 
+# import plotly
 # plotly.tools.set_credentials_file(username='', api_key='')
 
-import base64
+# init_notebook_mode(connected=True)
+
 with open("./nba-plan3.png", "rb") as image_file:
     encoded_string = base64.b64encode(image_file.read()).decode()
 # add the prefix that plotly will want when using the string as source
@@ -33,9 +34,9 @@ y = []
 d = []
 for row in old_rows:
     if row[1] == '0':
-        x.append(row[2])
-        y.append(row[3])
-        d.append(row[4])
+        x.append('%.2f' % float(row[2]))
+        y.append('%.2f' % float(row[3]))
+        d.append('%.2f' % float(row[4]))
 
 missed_shot_trace = go.Scatter(
     x=x,
@@ -60,9 +61,9 @@ y = []
 d = []
 for row in old_rows:
     if row[1] == '1':
-        x.append(row[2])
-        y.append(row[3])
-        d.append(row[4])
+        x.append('%.2f' % float(row[2]))  # to prettify the output
+        y.append('%.2f' % float(row[3]))
+        d.append('%.2f' % float(row[4]))
 
 
 made_shot_trace = go.Scatter(
@@ -82,6 +83,7 @@ made_shot_trace = go.Scatter(
     )
 )
 
+print('3. plot the figure!')
 data = [missed_shot_trace, made_shot_trace]
 layout = go.Layout(
     images=[dict(

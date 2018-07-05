@@ -20,13 +20,13 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{CDDE3092-4B39-4170-A158-7C68BE2A37BF}</ProjectGuid>
-    <RootNamespace>Hackbaseuse</RootNamespace>
+    <ProjectGuid>{D7158432-7A35-42C3-9C20-85FA79AD8A42}</ProjectGuid>
+    <RootNamespace>d3d9</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -69,11 +69,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ExecutablePath>$(ExecutablePath);$(DXSDK_DIR)Utilities\bin\x86</ExecutablePath>
-    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib\x86</LibraryPath>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ExecutablePath>$(ExecutablePath);$(DXSDK_DIR)Utilities\bin\x86</ExecutablePath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
@@ -92,7 +87,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\yo-ch\Desktop\GitHub\Daily_GUI_Tools\nba2k_shotchart_project\ref_hackbase\Release\HackBase.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -126,15 +121,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Hackbase\hotkey.cpp" />
+    <ClCompile Include="..\HackBase\d3d9hijack.cpp" />
+    <ClCompile Include="..\HackBase\hotkey.cpp" />
     <ClCompile Include="..\HackBase\main.cpp" />
     <ClCompile Include="..\HackBase\memoryaccess.cpp" />
-    <ClCompile Include="..\Hackbase\trainergraphic.cpp" />
-    <ClCompile Include="..\HackBase\trainerbase.h" />
-    <ClCompile Include="..\Hackbase\memoryaccess_afterkeydown.cpp" />
+    <ClCompile Include="..\HackBase\memoryaccess_afterkeydown.cpp" />
+    <ClCompile Include="..\HackBase\trainergraphic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\HackBase\minicsv.h" />
+    <ClInclude Include="..\HackBase\trainerbase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

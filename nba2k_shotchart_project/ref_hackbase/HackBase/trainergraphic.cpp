@@ -1,8 +1,8 @@
 #include "trainerbase.h"
 
 int border_width = 2;
-int column_width = 280;
-int column_height = 45;
+int column_width = 100;
+int column_height = 20;
 int court_bg_x = 240;	// in pixels
 int court_bg_y = 225;
 int dot_size = 8;
@@ -98,15 +98,15 @@ void onRender_dashboard(Renderer *renderer) {
 	renderer->DrawRect(0, 0, 4 * column_width, column_height, GRAY(64));
 	*/
 	// draw border
-	renderer->DrawBorder(0, 0, 1 * column_width, column_height, border_width, GREEN(255));
-	renderer->DrawBorder(0, 0, 2 * column_width, column_height, border_width, GREEN(255));
-	renderer->DrawBorder(0, 0, 3 * column_width, column_height, border_width, GREEN(255));
+	renderer->DrawBorder(0, 0, column_width, 1 * column_height, border_width, GREEN(255));
+	renderer->DrawBorder(0, 0, column_width, 2 * column_height, border_width, GREEN(255));
+	renderer->DrawBorder(0, 0, column_width, 3 * column_height, border_width, GREEN(255));
 	// renderer->DrawBorder(0, 0, 4 * column_width, column_height, border_width, GREEN(255));
 	// draw text
 	
 	renderer->DrawTxt(border_width, 1 + border_width, FontColor_default, F7_text);
-	renderer->DrawTxt(border_width + column_width, 1 + border_width, FontColor_default, score_type_text);
-	renderer->DrawTxt(border_width + 2 * column_width, 1 + border_width, FontColor_default, score_judge_text);
+	renderer->DrawTxt(border_width, 1 + border_width + column_height, FontColor_default, score_type_text);
+	renderer->DrawTxt(border_width, 1 + border_width + 2 * column_height, FontColor_default, score_judge_text);
 
 	/* do not need to expose the raw data to regular users.
 	char temp_str[255];
@@ -175,6 +175,8 @@ void UpdateGraphics(HackBase *mHackBase) {
 		mHackBase->setOnRender(onRender_dashboard);
 	}
 }
+
+
 
 
 /*samples */
