@@ -9,6 +9,7 @@ OMG WTH for several time i just wanted to refactor the whole piece of s**t! so c
 */
 #include "hackbase.h"
 #include "minicsv.h"
+#include <ctime>  // for header savings
 
 #define VERBOSEMODE false
 
@@ -39,7 +40,12 @@ extern char shot_triggered_time_text[];
 
 // general flags for toggling.
 extern bool record_shot_chart_and_more;
-extern bool clear_screen;
+enum ClearScreen {
+	all_clear,
+	clear_shotchart,
+	no_clear
+};
+extern enum ClearScreen clear_screen;
 extern bool clear_screen_already_cleared;
 
 // shotchart related
@@ -56,23 +62,58 @@ void onRender_clear(Renderer *renderer);
 void onRender_dashboard(Renderer *renderer);
 void onRender_shotchart(Renderer *renderer);
 
-// void onRender_F7(Renderer *renderer) {};
+extern float projected_percent;
+
+extern char* F6_text;
+extern char F6_text_f[];
+extern char F6_text_t[];
+
+
+
+// 保存至csv文件
+class SaveData {
+private:
+	std::string filename;
+	std::string current_time;
+public:
+	void Get_Current_Time();
+	void SaveDataFileHeader();
+	void SaveDataFileLines();
+	void SaveDataFileFooter(
+		float min,
+		int pts,
+		int fga,
+		int fgm,
+		int pa3,
+		int pm3,
+		int fta,
+		int ftm,
+		int freb,
+		int breb,
+		int ast,
+		int stl,
+		int blk,
+		int tov,
+		int plm
+	);
+};
 
 // 读写判断值，读写显示字符串，实现开关模式
-void SaveDataFileHeader();
 bool IsKeyDown(DWORD key);
 void UpdateHotkeys();
 // 读取判断值，读写内存数据，实现读取投篮数据/写入无敌模式
 void update_shot_coordinates(HANDLE pHandle);	// only used in sub, no need to put here
 void update_score_type(HANDLE pHandle);
 void change_god_mode(HANDLE pHandle);
-void SaveDataFileLines();
-void UpdateDMAs(HANDLE pHandle);
-void UpdateDMA_afterKeyDown(HANDLE pHandle_r, HANDLE pHandle_w);
+
+void UpdateDMAs(HANDLE pHandle, SaveData *mSaveData);
+void UpdateDMA_afterKeyDown(HANDLE pHandle_r, HANDLE pHandle_w, SaveData *mSaveData);
 // 读取判断值，绘制屏幕
 void UpdateBools();
 void UpdateGraphics(HackBase *mHackBase);
 
+
+extern int PTS;
 
 // dll hijacking
 typedef void* (WINAPI* Direct3DCreate9Type)(UINT SDKVersion);

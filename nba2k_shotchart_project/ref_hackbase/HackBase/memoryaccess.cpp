@@ -26,16 +26,7 @@ DWORD total_time_elapsed_addr	= 0x05439C1C;	// ×ÜÁ÷ÊÅÊ±¼ä£¬°üÀ¨ÔİÍ£±íÑİµÈ£¬²»°üÀ
 // dynasty, quick game, mplayer, jordan, etc.
 DWORD game_time_elapsed_addr	= 0x05544DF4;	// ±ÈÈüÁ÷ÊÅÊ±¼ä£¬½öÊÊÓÃÓÚ·Ö½Ú±ÈÈüµÄÄ£Ê½£¬ÃëÊı
 
-struct PerShotData {
-	PerShotData() : score_type_s(0), score_judge_s(0), coordinate_x_100_s(0.0f), coordinate_y_100_s(0.0f), absolute_dist_rim_s(0.0f) {}
-	PerShotData(int _score_type_s, int _score_judge_s, float _coordinate_x_100_s, float _coordinate_y_100_s, float _absolute_dist_rim_s)
-		: score_type_s(_score_type_s), score_judge_s(_score_judge_s), coordinate_x_100_s(_coordinate_x_100_s), coordinate_y_100_s(_coordinate_y_100_s), absolute_dist_rim_s(_absolute_dist_rim_s) {}
-	int score_type_s;
-	int score_judge_s;
-	float coordinate_x_100_s;
-	float coordinate_y_100_s;
-	float absolute_dist_rim_s;
-};
+
 
 
 void update_shot_coordinates(HANDLE pHandle) {
@@ -55,31 +46,29 @@ void update_score_type(HANDLE pHandle) {
 }
 
 
-void SaveDataFileLines() {
-	char a[] = "C:\\Chen\\testdata.csv";
-	csv::ofstream os(a);	// append mode
-	os.set_delimiter(',', "");
-	if (os.is_open()) {
-		PerShotData PerShotData0(score_type, score_judge, coordinate_x_100, coordinate_y_100, rim_dist);
-		os << PerShotData0.score_type_s << PerShotData0.score_judge_s << PerShotData0.coordinate_x_100_s << PerShotData0.coordinate_y_100_s << PerShotData0.absolute_dist_rim_s << NEWLINE;
-	}
-	os.flush();
-	return;
+void update_projected_percent(HANDLE pHandle) {
+	ReadProcessMemory(pHandle, (LPVOID)projected_percent_addr, &projected_percent, sizeof(projected_percent), 0);
 }
 
+
+
 // only read from global flags and the handle for address
-void UpdateDMAs(HANDLE pHandle) {
+void UpdateDMAs(HANDLE pHandle, SaveData *mSaveData) {
 	float shot_time_temp = shot_triggered_time;
 	float coordinate_x_temp = coordinate_x_100;
 	// aka direct memory access. manipulate the memory region.
 	update_score_type(pHandle);
 	update_shot_triggered_time(pHandle);
+	update_projected_percent(pHandle);
 	if (shot_time_temp != shot_triggered_time) {
 		if (made_shot_Z_down) {
 			// then myself triggered a shot. update the x-ys
+			// alley-oops are ignored due to my noobieness. :-<
 			update_shot_coordinates(pHandle);
 			(coordinate_x_temp == coordinate_x_100) ? (is_a_dunk = true) : (is_a_dunk = false);	// the tricy part ;-)
-			SaveDataFileLines();
+			if (record_shot_chart_and_more) {
+				mSaveData->SaveDataFileLines();  // only record when toggled to true
+			}
 			redraw_shotchart = true;	// serve as a lock to control the read from vector
 			made_shot_Z_down = false;	// reset the state and wait for another shot
 		}

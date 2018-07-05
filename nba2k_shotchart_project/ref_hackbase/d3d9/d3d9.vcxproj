@@ -121,6 +121,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\HackBase\csvsavedata.cpp" />
     <ClCompile Include="..\HackBase\d3d9hijack.cpp" />
     <ClCompile Include="..\HackBase\hotkey.cpp" />
     <ClCompile Include="..\HackBase\main.cpp" />

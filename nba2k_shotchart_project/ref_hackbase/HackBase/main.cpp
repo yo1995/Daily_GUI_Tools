@@ -5,6 +5,7 @@
 #include "trainerbase.h"
 
 HackBase *mHackBase = 0;
+SaveData *mSaveData = 0;
 HMODULE g_d3d9Module = NULL;
 
 bool d3d9hijack(HMODULE hModule) {
@@ -16,8 +17,13 @@ bool d3d9hijack(HMODULE hModule) {
 		_tcscat_s(msg, processPath);
 		MessageBox(NULL, msg, _T(""), MB_OK);
 	}
+	
+	char dllPath[MAX_PATH];
+	GetSystemDirectory(dllPath, MAX_PATH);
+	strcat_s(dllPath, "\\d3d9.dll");
+	
 	// 加载原DLL，获取真正的Direct3DCreate9地址
-	g_d3d9Module = LoadLibrary(_T("C:\\Windows\\System32\\d3d9.dll"));
+	g_d3d9Module = LoadLibrary(dllPath);
 	RealDirect3DCreate9 = (Direct3DCreate9Type)GetProcAddress(g_d3d9Module, "Direct3DCreate9");
 	if (RealDirect3DCreate9 == NULL)
 	{
@@ -31,7 +37,7 @@ void init_main() {
 	Sleep(8000);  // a silly way to load my trainer after game itself initialized.
 	char exename[] = "nba2k11.exe"; //GFXTest32.exe nba2k11.exe
 	char windowname[] = "NBA 2K11"; //Renderer: [DirectX9], Input: [Raw input], 32 bits  NBA 2K11
-	mHackBase = HackBase::Singleton();
+	mHackBase = HackBase::Singleton();  // new a hackbase to hook d3d
 	if (!mHackBase->Initialize(onRender_clear, exename, windowname)) {
 		MessageBox(0, "Error hooking game. Maybe injected into wrong process...", "Failed to hook...", MB_ICONERROR);
 		return;
@@ -47,12 +53,14 @@ void init_main() {
 		MessageBox(0, "Error Finding Window.", "Window mismatch!", MB_ICONERROR);
 		return;
 	}
-	
+	// create a filename class to handle record adata file.
+	mSaveData = new SaveData();
+
 	while (true) { //infinite loop! might affect the performance.
-		UpdateDMAs(pHandle_r);
+		UpdateDMAs(pHandle_r, mSaveData);
 		// keys after dma cause we need to depend on Z down
 		UpdateHotkeys();
-		UpdateDMA_afterKeyDown(pHandle_r, pHandle_w);
+		UpdateDMA_afterKeyDown(pHandle_r, pHandle_w, mSaveData);
 		UpdateGraphics(mHackBase);
 		Sleep(200); // loop will only start again after 1/5 of a second
 	}
@@ -90,12 +98,6 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 /*samples */
 // MessageBox(0, "We are here hehe.", "nana...", 0);
 /*
-while (true) {
-UpdateDMAs();
-UpdateHacks();
-Sleep(10);
-}
-
 
 template<typename T>
 const bool WriteMem(const SIZE_T Address, const T value)

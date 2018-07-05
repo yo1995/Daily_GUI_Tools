@@ -22,6 +22,10 @@ char score_type_other[] = "其它";
 char score_judge_0[] = "没进";
 char score_judge_1[] = "进了";
 
+// F6 start/stop to record data
+char* F6_text = F6_text_f;
+char F6_text_f[] = "停止记录数据";
+char F6_text_t[] = "开始记录数据";
 
 // F7 god_mode related
 // char 
@@ -31,11 +35,11 @@ char F7_text_t[] = "GodMode: On";
 
 
 // F8 toggle dashboard on/off
-
+bool made_shot_Z_down = false;
 
 bool record_shot_chart_and_more = false;
 bool made_shot_prediction = false;
-bool clear_screen = false;
+// bool clear_screen = false;
 bool clear_screen_already_cleared = false;
 bool all_players_god_mode = false;
 bool redraw_shotchart = false;
@@ -45,6 +49,12 @@ float coordinate_x_100 = 0;
 float coordinate_y_100 = 0;
 float rim_dist = 0;
 float shot_triggered_time = 0;
+
+float projected_percent = 0;
+
+int PTS = 0;
+
+enum ClearScreen clear_screen = no_clear;
 
 void onRender_clear(Renderer *renderer) {
 	// by default we do not draw things on the screen. this is the default.
@@ -62,7 +72,7 @@ void onRender_shotchart(Renderer *renderer) {
 
 	// windowed mode have borders and offsets
 	renderer->DrawPic((renderer->GetWidth() - court_bg_x - 8 * border_width), (renderer->GetHeight() - court_bg_y - 15 * border_width));
-	if (redraw_shotchart) {	// means that i'm not writing into the coordinates
+	//if (redraw_shotchart) {	// means that i'm not writing into the coordinates
 		if (is_a_dunk) {
 			if (score_judge) { // scored
 				renderer->DrawRect((renderer->GetWidth() + court_bg_x + 8 * border_width + 118), (renderer->GetHeight() + court_bg_y + 15 * border_width + 26), dot_size, dot_size, GREEN(255));
@@ -70,7 +80,7 @@ void onRender_shotchart(Renderer *renderer) {
 			else {	// missed
 				renderer->DrawRect((renderer->GetWidth() + court_bg_x + 8 * border_width + 118), (renderer->GetHeight() + court_bg_y + 15 * border_width + 26), dot_size, dot_size, RED(255));
 			}
-			//120, 26 is the coord of basket
+			//118, 26 is the coord of basket
 		}
 		else {
 			if (score_judge) { // scored
@@ -80,7 +90,7 @@ void onRender_shotchart(Renderer *renderer) {
 				renderer->DrawRect(x_0 + coordinate_y_100 * ratioy + 1, y_0 + coordinate_x_100 * ratiox + 1, dot_size, dot_size, RED(255));
 			}
 		}
-	}
+	//}
 		
 	// pass in a vector<missed, pair<x, y> >
 	// related with r/w mutex, cannot read when writing to the var. 
@@ -98,15 +108,24 @@ void onRender_dashboard(Renderer *renderer) {
 	renderer->DrawRect(0, 0, 4 * column_width, column_height, GRAY(64));
 	*/
 	// draw border
+	/*
 	renderer->DrawBorder(0, 0, column_width, 1 * column_height, border_width, GREEN(255));
 	renderer->DrawBorder(0, 0, column_width, 2 * column_height, border_width, GREEN(255));
 	renderer->DrawBorder(0, 0, column_width, 3 * column_height, border_width, GREEN(255));
 	// renderer->DrawBorder(0, 0, 4 * column_width, column_height, border_width, GREEN(255));
+	*/
 	// draw text
-	
-	renderer->DrawTxt(border_width, 1 + border_width, FontColor_default, F7_text);
-	renderer->DrawTxt(border_width, 1 + border_width + column_height, FontColor_default, score_type_text);
-	renderer->DrawTxt(border_width, 1 + border_width + 2 * column_height, FontColor_default, score_judge_text);
+	renderer->DrawTxt(border_width, 1 + border_width, RED(255), F6_text);
+	renderer->DrawTxt(border_width, 1 + border_width + column_height, FontColor_default, F7_text);
+	renderer->DrawTxt(border_width, 1 + border_width + 2 * column_height, FontColor_default, score_type_text);
+	renderer->DrawTxt(border_width, 1 + border_width + 3 * column_height, FontColor_default, score_judge_text);
+	char temp_str[255];
+	sprintf_s(temp_str, "%.2f％", 100 * projected_percent);
+	renderer->DrawTxt(border_width, 1 + border_width + 4 * column_height, FontColor_default, temp_str);
+	if (is_a_dunk) {
+		char temp_str[20] = "是个扣篮";
+		renderer->DrawTxt(border_width, 1 + border_width + 5 * column_height, FontColor_default, temp_str);
+	}
 
 	/* do not need to expose the raw data to regular users.
 	char temp_str[255];
@@ -117,8 +136,9 @@ void onRender_dashboard(Renderer *renderer) {
 	sprintf_s(temp_str, "%.2f", rim_dist);
 	renderer->DrawTxt(border_width + 2 * column_width, column_height + border_width, FontColor_default, temp_str);
 	*/
-
-	onRender_shotchart(renderer);
+	if (clear_screen == no_clear) {
+		onRender_shotchart(renderer);
+	}
 }
 
 
@@ -146,25 +166,18 @@ void UpdateBools() {
 		break;
 	}
 	// 进球判断
-	switch (score_judge) {
-	case 0:
-		score_judge_text = score_judge_0;
-		break;
-	case 1:
-		score_judge_text = score_judge_1;
-		break;
-	default:
-		break;
-	}
+	score_judge ? (score_judge_text = score_judge_1) : (score_judge_text = score_judge_0);
+	// 记录数据判断
+	record_shot_chart_and_more ? (F6_text = F6_text_t) : (F6_text = F6_text_f);
 }
 // only read from global flags and the render handle for graphic
 void UpdateGraphics(HackBase *mHackBase) {
 	UpdateBools();
 
-	if (clear_screen && clear_screen_already_cleared) {
+	if (clear_screen == all_clear && clear_screen_already_cleared) {
 		return;
 	}
-	else if (clear_screen && !clear_screen_already_cleared) {
+	else if (clear_screen == all_clear && !clear_screen_already_cleared) {
 		mHackBase->setOnRender(onRender_clear);
 		clear_screen_already_cleared = true;
 	}

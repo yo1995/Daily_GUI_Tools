@@ -26,6 +26,12 @@ void onRenderEvent(Renderer *renderer) {
 		case WindowsVersion_Win8:
 			logln("Win version: Win8 or greater");
 			break;
+		case WindowsVersion_Win10:
+			logln("Win version: Win10");
+			break;
+		case WindowsVersion_Unknown:
+			logln("Win version: unknown");
+			break;
 		}
 		switch(hackbase->getD3DVersion()) {
 		case D3DVersion_D3D9:

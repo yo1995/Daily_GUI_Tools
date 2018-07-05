@@ -1,6 +1,6 @@
 #include "trainerbase.h"
 
-bool made_shot_Z_down = false;
+
 
 bool IsKeyDown(DWORD key) {
 	if (GetAsyncKeyState(key)) {
@@ -9,21 +9,25 @@ bool IsKeyDown(DWORD key) {
 	return false;
 }
 
-void SaveDataFileHeader() {
-
-}
 
 
 void UpdateHotkeys() {
-	// made_shot_Z_down = false;
-	if (IsKeyDown(VK_F6)) {
-		record_shot_chart_and_more = !record_shot_chart_and_more;
-		SaveDataFileHeader();
-		// 显示：当前数据已记录，在graphic的 update bool中
-		// 
-	}
 	if (IsKeyDown(VK_F8)) {
-		clear_screen = !clear_screen;
+		switch (clear_screen)
+		{
+		case all_clear:
+			clear_screen = no_clear;
+			break;
+		case clear_shotchart:
+			clear_screen = all_clear;
+			break;
+		case no_clear:
+			clear_screen = clear_shotchart;
+			break;
+		default:
+			clear_screen = no_clear;
+			break;
+		}
 	}
 	IsKeyDown('Z') ? made_shot_Z_down = true : made_shot_Z_down = false;
 }
