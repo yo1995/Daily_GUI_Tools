@@ -68,14 +68,29 @@ extern char* F6_text;
 extern char F6_text_f[];
 extern char F6_text_t[];
 
+extern char* dunk_text;
+extern char dunk_text_t[];
+extern char dunk_text_f[];
 
+extern int record_mode;
+extern char* record_mode_text;
+extern char record_mode_text_1[];
+extern char record_mode_text_2[];
+
+extern int fga_global;
+extern int fta_global;
+extern int pa3_global;
+
+extern int pts_type;  // 1pt ft, 2pt, 3pt. default 0 for simple record mode.
 
 // 保存至csv文件
 class SaveData {
 private:
 	std::string filename;
 	std::string current_time;
+	csv::ofstream os;
 public:
+	void SaveDataFileInitandOpen();
 	void Get_Current_Time();
 	void SaveDataFileHeader();
 	void SaveDataFileLines();
@@ -100,7 +115,7 @@ public:
 
 // 读写判断值，读写显示字符串，实现开关模式
 bool IsKeyDown(DWORD key);
-void UpdateHotkeys();
+void UpdateHotkeys(int &delay);
 // 读取判断值，读写内存数据，实现读取投篮数据/写入无敌模式
 void update_shot_coordinates(HANDLE pHandle);	// only used in sub, no need to put here
 void update_score_type(HANDLE pHandle);

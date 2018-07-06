@@ -7,7 +7,7 @@ DWORD god_mode_byte_addr = 0x0097D9A3;	// nba2k11.exe+57D99D - C7 05 78FAD505 00
 
 
 // 2. the following data are for SG player, particular for jordan mplayer mode
-DWORD MIN_ADDR = 0x05C31B98;  // IN FLOAT
+DWORD MIN_ADDR = 0x05C31B98;  // IN FLOAT seconds
 DWORD PTS_ADDR = 0x05C31874;
 DWORD FGA_ADDR = 0x05C31884;
 DWORD FGM_ADDR = 0x05C31880;
@@ -98,6 +98,7 @@ void UpdateDMA_afterKeyDown(HANDLE pHandle_r, HANDLE pHandle_w, SaveData *mSaveD
 		}
 		else {
 			record_shot_chart_and_more = true;
+			mSaveData->SaveDataFileInitandOpen();
 			mSaveData->SaveDataFileHeader();
 		}
 		// 显示：当前数据已记录，在graphic的 update bool中

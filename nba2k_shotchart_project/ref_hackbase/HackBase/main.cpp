@@ -55,11 +55,12 @@ void init_main() {
 	}
 	// create a filename class to handle record adata file.
 	mSaveData = new SaveData();
-
+	int i = 0;  // decrease the time of update, serve as a delay.
 	while (true) { //infinite loop! might affect the performance.
+		// i > 5 ? i = 0 : ++i;
 		UpdateDMAs(pHandle_r, mSaveData);
 		// keys after dma cause we need to depend on Z down
-		UpdateHotkeys();
+		UpdateHotkeys(i);
 		UpdateDMA_afterKeyDown(pHandle_r, pHandle_w, mSaveData);
 		UpdateGraphics(mHackBase);
 		Sleep(200); // loop will only start again after 1/5 of a second
@@ -85,6 +86,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 			break;
 		case DLL_PROCESS_DETACH:
 			SAFE_DELETE(mHackBase);
+			SAFE_DELETE(mSaveData);
 			if (VERBOSEMODE) {
 				MessageBox(NULL, _T("DLL卸载中"), _T(""), MB_OK);
 			}
