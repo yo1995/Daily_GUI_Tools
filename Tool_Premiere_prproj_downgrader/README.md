@@ -1,3 +1,5 @@
+![logo](./logo.png)
+
 ## Description
 
 A simple GUI tool to convert Adobe Premiere Pro CC project file versions.
@@ -8,12 +10,14 @@ This tool works until Pr reaches version 40. Just need to manually assign if lat
 
 ## Chart
 
-|Pr CC 2018   | 35|
-|Pr CC 2017.4 | 34|
-|Pr CC 2017.1 | 33|
-|Pr CC 2017   | 32|
-|Pr CC 2015.5 | 31|
-|Pr CC 2015.2 | 30|
+| Product Name | Version |
+| ------ | ------ |
+| Pr CC 2018   | 35 |
+| Pr CC 2017.4 | 34 |
+| Pr CC 2017.1 | 33 |
+| Pr CC 2017   | 32 |
+| Pr CC 2015.5 | 31 |
+| Pr CC 2015.2 | 30 |
 
 ## Versions
 
