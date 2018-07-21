@@ -36,7 +36,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>prproj-512.ico</ApplicationIcon>
+    <ApplicationIcon>prproj-256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="prproj-01-512.ico" />
+    <Content Include="prproj-256.ico" />
     <Content Include="prproj-512.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

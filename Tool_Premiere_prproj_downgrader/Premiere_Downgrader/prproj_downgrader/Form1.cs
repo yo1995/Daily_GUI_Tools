@@ -38,9 +38,11 @@ namespace prproj_downgrader {
             ofd.HelpRequest += new EventHandler(ofd_HelpRequest);
             if (ofd.ShowDialog() == DialogResult.OK) {
                 inFileName = ofd.FileName;
+                this.comboBox1.Enabled = true;
+                label1.Text = "1. File Selected.";
+                label1.BackColor = Color.Lime;
             }
-            label1.Text = "1. File Selected.";
-            label1.BackColor = Color.Lime;
+            ofd.Dispose();
         }
 
 
@@ -67,6 +69,7 @@ namespace prproj_downgrader {
             }
             label2.Text = "2. Version Selected.";
             label2.BackColor = Color.Lime;
+            this.button2.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e) {
@@ -75,6 +78,9 @@ namespace prproj_downgrader {
             switch (item) {
                 case "Premiere Pro CC 2018 - 35":
                     version = 35;
+                    break;
+                case "Premiere Pro CC 2017.4 - 34":
+                    version = 33;
                     break;
                 case "Premiere Pro CC 2017.1 - 33":
                     version = 33;
@@ -111,6 +117,8 @@ namespace prproj_downgrader {
             label2.Text = "2. Select target version";
             label1.BackColor = SystemColors.Control;
             label2.BackColor = SystemColors.Control;
+            this.button2.Enabled = false;  // only convert one file once
+            this.comboBox1.Enabled = false;
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e) {
@@ -130,6 +138,8 @@ namespace prproj_downgrader {
 
         private void Form1_Load(object sender, EventArgs e) {
             // this.comboBox1.SelectedIndex = this.comboBox1.Items.IndexOf("Premiere Pro CC 2017 - 32");
+            this.button2.Enabled = false;  // falsify on load so no wrong click
+            this.comboBox1.Enabled = false;
         }
 
         private void Change_Version(string out_file_name, int version) {

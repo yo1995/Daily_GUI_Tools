@@ -87,6 +87,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Premiere Pro CC 2018 - 35",
+            "Premiere Pro CC 2017.4 - 34",
             "Premiere Pro CC 2017.1 - 33",
             "Premiere Pro CC 2017 - 32",
             "Premiere Pro CC 2015.5 - 31",
