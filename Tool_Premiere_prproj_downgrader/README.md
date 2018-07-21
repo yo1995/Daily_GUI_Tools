@@ -29,6 +29,8 @@ This tool works until Pr reaches version 40. Just need to manually assign if lat
 
 ## Usage
 
+0. [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653) or later to run
+
 1. 打开文件
 
 2. 选择转换到的代数 或自定义数值 最小为0即可
@@ -39,6 +41,26 @@ This tool works until Pr reaches version 40. Just need to manually assign if lat
 
 Adobe Premiere Pro CC | .prproj | prproj | Pr project file| Premiere Downgrader | PremiereDowngrader | tool | easy | C#
 
+## 具体实现
+
+### 文件读取
+
+点击按钮，打开文件dialog，正确打开则读取文件名。
+
+### 版本选择
+
+combobox下拉列表选择对应键值，switch-case对应目标版本号。
+
+### .prproj文件处理
+
+GZipStream类实现gzip压缩/解压缩；解压缩后使用XML类操作K-V pairs。改变project->attribute("version")即可。
+
 ## Refs
 
+[Path Class (System.IO)](https://msdn.microsoft.com/en-us/library/system.io.path(v=vs.110).aspx
+
+[XmlDocument Class](https://msdn.microsoft.com/en-us/library/system.xml.xmldocument%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396)
+
 [PR工程版本转换攻略](http://www.gfxtr1.com/Tutorials/Magazines/2017-09-25/6457.html)
+
+[C#压缩与解压缩流类 GZipStream](https://www.cnblogs.com/csMapx/archive/2012/06/04/2534396.html)
