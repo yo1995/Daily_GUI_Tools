@@ -12,7 +12,7 @@
 
 ## [cpp] universallink_converter
 	
-	a simplified version of NBA converter. just a tool without full testings.
+	a simplified version of NBA converter. just a tool without fully tested.
 
 ## [cpp] [obsolete] [develop] nba2k_shotchart_project
 
