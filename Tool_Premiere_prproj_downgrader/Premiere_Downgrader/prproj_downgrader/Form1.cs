@@ -80,7 +80,7 @@ namespace prproj_downgrader {
                     version = 35;
                     break;
                 case "Premiere Pro CC 2017.4 - 34":
-                    version = 33;
+                    version = 34;
                     break;
                 case "Premiere Pro CC 2017.1 - 33":
                     version = 33;
