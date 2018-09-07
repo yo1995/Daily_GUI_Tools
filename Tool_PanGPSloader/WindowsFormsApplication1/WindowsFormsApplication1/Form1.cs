@@ -26,5 +26,13 @@ namespace WindowsFormsApplication1
             a.WindowStyle = ProcessWindowStyle.Hidden;
             Process process = Process.Start(a);
         }
+
+        private void Form1_Load(object sender, EventArgs e) {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e) {
+
+        }
     }
 }
