@@ -1,5 +1,7 @@
 ![logo](./logo.png)
 
+[Click to download](./released)
+
 ## Description
 
 Nowadays, there is a growing tendency for people to take pictures with their everyday devices. Most of those devices have locating features connected with GPS or other locating services providers. However, people might not be aware of that their photos can somehow leak their position. When we post our photos to most sites like Instagram or weibo, the just compress it to get rid of the risk of leaking original information alongside the photo. However, sites like Flickr or more personal, amateurish forums might not even process your photo, which will expose the raw data of GPS, camera model, rating and more infos to anyone who has access to it. Sounds dangerous, huh?
