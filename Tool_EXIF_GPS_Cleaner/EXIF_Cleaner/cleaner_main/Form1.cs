@@ -211,7 +211,43 @@ namespace cleaner_main {
             catch (FileNotFoundException) {
                 return false;
             }
+            int i;
+            bool temp = true;
+            /* 
+            * since id = 0 is the GPS version, just omit it;
+            * id = 27~30 might not be supported by older version, just neglect them
+            * others, check exist and remove!
+            */
+            for (i = 1; i < 27; i++) {
+                // since it's ambiguous in the doc of this chunk of code, just do what I think is valid.
+                // ref: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image.getpropertyitem?view=netframework-4.7.2#remarks
+                try {
+                    img.GetPropertyItem(i);
+                }
+                catch (ArgumentException) {
+                    continue;
+                }
+                img.RemovePropertyItem(i);
+            }
+            // id = 29 is GPSDateStamp, just try to erase it.
+            try {
+                img.GetPropertyItem(29);
+            }
+            catch (ArgumentException) {
+                temp = false;
+            }
+            if (temp) img.RemovePropertyItem(29);
 
+
+            String fileNameTemp = inFileName + ".temp";
+            img.Save(fileNameTemp);
+            img.Dispose();
+            GC.Collect();
+            System.IO.File.Delete(inFileName);
+            // rename
+            if (System.IO.File.Exists(fileNameTemp)) {
+                System.IO.File.Move(fileNameTemp, inFileName);
+            }
             return true;
         }
 
@@ -254,6 +290,7 @@ namespace cleaner_main {
 
         // deal with multiselect
         private void tabPage2_MouseClick(object sender, MouseEventArgs e) {
+            String error_string = "";
             OpenFileDialog ofd = new OpenFileDialog {
                 Multiselect = true,
                 Title = "Please choose the image with GPS to show in map.",
@@ -265,7 +302,19 @@ namespace cleaner_main {
             };
             ofd.HelpRequest += new EventHandler(ofd_HelpRequest);
             if (ofd.ShowDialog() == DialogResult.OK) {
-                // get_GPS_info(ofd.FileName);
+                foreach (String fname in ofd.FileNames) {
+                    if (!clear_GPS_info(fname)) {
+                        error_string += fname;
+                        error_string += "\n";
+                    }
+                }
+            }
+            if (error_string.Length > 0) {
+                error_string = "Error! Following files cannot be processed.\n" + error_string;
+                MessageBox.Show(error_string, "Exception list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else {
+                MessageBox.Show("Succeed!", "File processing complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             ofd.Dispose();
             GC.Collect();
@@ -351,7 +400,7 @@ namespace cleaner_main {
                 MessageBox.Show(error_string, "Exception list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else {
-                MessageBox.Show("Succeed!", "File processing complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Succeed!", "File processing complete.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -373,7 +422,34 @@ namespace cleaner_main {
         }
 
         private void tabPage3_Click(object sender, EventArgs e) {
-
+            String error_string = "";
+            OpenFileDialog ofd = new OpenFileDialog {
+                Multiselect = true,
+                Title = "Please choose the image with GPS to show in map.",
+                Filter = "JPEG Image (*.jpg)|*.jpg;*.jpeg|WebP Image (*.webp)|*.webp|TIFF Image (*.tiff) | *.tif; *.tiff",
+                ValidateNames = true,
+                CheckPathExists = true,
+                CheckFileExists = true,
+                ShowHelp = true
+            };
+            ofd.HelpRequest += new EventHandler(ofd_HelpRequest);
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                foreach (String fname in ofd.FileNames) {
+                    if (!clear_EXIF_info(fname)) {
+                        error_string += fname;
+                        error_string += "\n";
+                    }
+                }
+            }
+            if (error_string.Length > 0) {
+                error_string = "Error! Following files cannot be processed.\n" + error_string;
+                MessageBox.Show(error_string, "Exception list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else {
+                MessageBox.Show("Succeed!", "File processing complete.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            ofd.Dispose();
+            GC.Collect();
         }
 
         #endregion

@@ -24,6 +24,9 @@ easy | tool |
 
 [Save image without sacrificing its quality](http://www.nullskull.com/articles/20030706.asp)
 
+what to preserve in removeAll method?
+https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id?view=netframework-4.7.2
+
 ## Refs
 
 [EXIF standard](https://www.exif.org/Exif2-2.PDF)
@@ -43,3 +46,5 @@ easy | tool |
 [GPS in C#](https://stackoverflow.com/questions/4983766/getting-gps-data-from-an-images-exif-in-c-sharp)
 
 [Property IDs for an Image's EXIF](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id)
+
+[Catch中return会执行finally](https://www.cnblogs.com/harmonyboy/p/3403729.html)
