@@ -1,4 +1,4 @@
-![logo](https://github.com/yo1995/Daily_GUI_Tools/raw/master/universal_link_converter/universal-access.png)
+![logo](./universal-access.png)
 
 ## Description
 

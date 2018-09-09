@@ -51,6 +51,10 @@ https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.
 
 from my perspective of view, some more info could be saved, such as DPI, dimensions, color space, etc. if you have better idea what to preserve, just PR me!
 
+- Drifting
+
+地图仍旧存在漂移的问题，不过不影响大致方位。大概有小于1000m的误差。
+
 ## Methods
 
 最简单的避免隐私泄露的方法：存成png文件 - 因为png原生并不支持EXIF字段，除非刻意添加，否则不会暴露你的位置和设备型号。
