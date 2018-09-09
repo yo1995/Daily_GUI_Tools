@@ -6,6 +6,12 @@ Nowadays, there is a growing tendency for people to take pictures with their eve
 
 PicGPSCleaner is a simple tool to remove the related GPS/All EXIF info contained in an image, especially designed for .jpg photo files taken with modern cell phones or DSLR cameras. Just for the case described above!
 
+PicGPSCleaner - 一个用于 查看照片GPS 和 清除照片GPS 的小工具。
+
+当今智能手机普及，在网络上发送原图时很容易暴露一些隐私数据如设备型号，GPS信息，照片评级等等。
+
+本工具用来一键清除GPS数据，还你一组无后顾之忧的照片！同时，还可以一键查看照片GPS对应地图位置，免去自行输入EXIF的烦扰。
+
 ## Versions
 
 ### 20180908 v1.0.1
