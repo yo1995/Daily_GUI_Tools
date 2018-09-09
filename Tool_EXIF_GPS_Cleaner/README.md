@@ -59,6 +59,8 @@ from my perspective of view, some more info could be saved, such as DPI, dimensi
 
 最简单的避免隐私泄露的方法：存成png文件 - 因为png原生并不支持EXIF字段，除非刻意添加，否则不会暴露你的位置和设备型号。
 
+更简单粗暴的方法：手机截图再发送……如果不在乎画质的话。可是谁会在乎手机画质呢？——华为，国家平台，成就国家品牌！
+
 ## Refs
 
 [EXIF standard](https://www.exif.org/Exif2-2.PDF)
