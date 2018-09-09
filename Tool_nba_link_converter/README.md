@@ -1,4 +1,4 @@
-![logo](https://github.com/yo1995/Daily_GUI_Tools/raw/master/nba_link_converter/NBA_1024px_1186144_easyicon.net.png)
+![logo](./NBA_1024px_1186144_easyicon.net.png)
 
 ## Description
 

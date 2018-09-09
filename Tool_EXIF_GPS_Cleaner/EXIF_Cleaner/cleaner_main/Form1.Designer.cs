@@ -23,6 +23,7 @@
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +45,7 @@
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(297, 223);
+            this.tabControl1.Size = new System.Drawing.Size(298, 223);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -60,7 +61,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(289, 197);
+            this.tabPage1.Size = new System.Drawing.Size(290, 197);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "GPS in Map";
             this.tabPage1.ToolTipText = "Open file or drag-drop to check the GPS info of an image.";
@@ -123,7 +124,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(289, 197);
+            this.tabPage2.Size = new System.Drawing.Size(290, 197);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Clear GPS";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -140,7 +141,7 @@
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(289, 197);
+            this.tabPage3.Size = new System.Drawing.Size(290, 197);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Clear all";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -154,11 +155,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 249);
+            this.ClientSize = new System.Drawing.Size(323, 249);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "PicGPS";
+            this.ShowIcon = false;
+            this.Text = "PicGPSCleaner";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

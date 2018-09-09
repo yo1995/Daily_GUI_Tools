@@ -75,10 +75,10 @@ namespace cleaner_main {
             double secondsDenominator = BitConverter.ToUInt32(propItem.Value, 20);
             double seconds = secondsNumerator / (double)secondsDenominator;
 
-            double coorditate = degrees + (minutes / 60d) + (seconds / 3600d);
+            double coordinate = degrees + (minutes / 60d) + (seconds / 3600d);
             string gpsRef = System.Text.Encoding.ASCII.GetString(new byte[1] { propItemRef.Value[0] });  // N, S, E, or W
-            if (gpsRef == "S" || gpsRef == "W") coorditate = coorditate * -1;  // as the definition of coord in maps
-            return coorditate;
+            if (gpsRef == "S" || gpsRef == "W") coordinate = coordinate * -1;  // as the definition of coord in maps
+            return coordinate;
         }
 
         
@@ -113,6 +113,7 @@ namespace cleaner_main {
             }
             catch (ArgumentException) {
                 MessageBox.Show("Warning: File doesn't contain GPS metadata!", "File not valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                img.Dispose();
                 return;
             }
             
@@ -148,7 +149,7 @@ namespace cleaner_main {
             String baidu_url = "http://api.map.baidu.com/lbsapi/getpoint/index.html";
             String query_str = latitude + "," + longitude;
             Clipboard.SetDataObject(query_str);
-            MessageBox.Show("Info: 由于百度地图限制，请手动勾选坐标反查。\n经纬度已复制到剪贴板！", "手动查询", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Info: 由于百度地图限制，请手动勾选“坐标反查”。\n百度地图存在坐标漂移，位置可能存在偏差。\n经纬度已复制到剪贴板！", "手动查询", MessageBoxButtons.OK, MessageBoxIcon.Information);
             System.Diagnostics.Process.Start(baidu_url);
         }
 
@@ -308,13 +309,13 @@ namespace cleaner_main {
                         error_string += "\n";
                     }
                 }
-            }
-            if (error_string.Length > 0) {
-                error_string = "Error! Following files cannot be processed.\n" + error_string;
-                MessageBox.Show(error_string, "Exception list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else {
-                MessageBox.Show("Succeed!", "File processing complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                if (error_string.Length > 0) {
+                    error_string = "Error! Following files cannot be processed.\n" + error_string;
+                    MessageBox.Show(error_string, "Exception list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else {
+                    MessageBox.Show("Succeed!", "File processing complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
             }
             ofd.Dispose();
             GC.Collect();
@@ -369,6 +370,7 @@ namespace cleaner_main {
                 }
             }
             catch (ArgumentException) {
+                img.Dispose();
                 return false;
             }
             // might be concerns about the quality.
@@ -440,14 +442,15 @@ namespace cleaner_main {
                         error_string += "\n";
                     }
                 }
+                if (error_string.Length > 0) {
+                    error_string = "Error! Following files cannot be processed.\n" + error_string;
+                    MessageBox.Show(error_string, "Exception list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else {
+                    MessageBox.Show("Succeed!", "File processing complete.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
             }
-            if (error_string.Length > 0) {
-                error_string = "Error! Following files cannot be processed.\n" + error_string;
-                MessageBox.Show(error_string, "Exception list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else {
-                MessageBox.Show("Succeed!", "File processing complete.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
+            
             ofd.Dispose();
             GC.Collect();
         }

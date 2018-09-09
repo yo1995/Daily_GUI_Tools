@@ -1,3 +1,5 @@
+![logo](./favicon.ico)
+
 ## Description
 
 适用于Windows关闭Palo Alto Networks/Global Protect VPN的小工具
