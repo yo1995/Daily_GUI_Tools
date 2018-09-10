@@ -16,7 +16,7 @@ download the photos with ?h=[]&w=[] pattern
 
 ### hover at topmost
 
-![hover](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/universal_link_converter/hover.gif)
+![hover](./universal_link_converter/hover.gif)
 
 ### process either the raw link or the wrapper tag containing the link
 
@@ -26,7 +26,7 @@ e.g. you can just use it like shown below. copy the whole tag or just find the l
 
 run it. after copying the text containing the link for the picture, click the textbox and it will read your clipboard for the link and open the picture in default browser.
 
-![usage](https://raw.githubusercontent.com/yo1995/Daily_GUI_Tools/master/universal_link_converter/usage.gif)
+![usage](./universal_link_converter/usage.gif)
 
 
 ## Keywords
