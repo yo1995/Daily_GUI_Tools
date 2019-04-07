@@ -26,8 +26,6 @@ e.g. you can just use it like shown below. copy the whole tag or just find the l
 
 run it. after copying the text containing the link for the picture, click the textbox and it will read your clipboard for the link and open the picture in default browser.
 
-![usage](./usage.gif)
-
 
 ## Keywords
 
