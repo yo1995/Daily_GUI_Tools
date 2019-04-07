@@ -28,7 +28,7 @@ A friendly fork of
 
 ### Release
 
-Download from `Released` [folder](/LG-Ultrafine-brightness/Released/) for the newest version. Check GitHub Release feature for stable version.
+Download from `Released` [folder](/Tool_LG-Ultrafine-brightness/LG-Ultrafine-brightness/Released/) for the newest version. Check GitHub Release feature for stable version.
 
 ### Borrowed from @csujedihy 
 
