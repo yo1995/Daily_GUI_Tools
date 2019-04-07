@@ -26,7 +26,7 @@ A friendly fork of
 
 ## Usage
 
-Borrowed from @csujedihy.
+Borrowed from @csujedihy 
 
 ---
 
@@ -36,7 +36,7 @@ The program simply send set feature report to the device via USB and then the LG
 
 This project is derived from [https://github.com/unknownzerx/lguf-brightness](https://github.com/unknownzerx/lguf-brightness). 
 
-Thanks @unknownzerx.
+Thanks @unknownzerx 
 
 The original tool was unable to adjust brightness in Windows 10 and I also made some minor improvements to it like showing current brightness and efficiency while adjusting.
 
