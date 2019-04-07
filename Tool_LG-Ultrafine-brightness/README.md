@@ -26,7 +26,11 @@ A friendly fork of
 
 ## Usage
 
-Borrowed from @csujedihy 
+### Release
+
+Download from `Released` [folder](/LG-Ultrafine-brightness/Released/) for the newest version. Check GitHub Release feature for stable version.
+
+### Borrowed from @csujedihy 
 
 ---
 
