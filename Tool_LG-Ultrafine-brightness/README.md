@@ -1,5 +1,9 @@
 ## Description
 
+For commandline version, use the directory without GUI in its path.
+
+**For GUI version, download 2 files in [this folder](/Tool_LG-Ultrafine-brightness/CLR_GUI/Released) and launch them.**
+
 This is a working command line tool for adjusting brightness for LG UltraFine series monitors. Works fine with my LG UltraFine 5K - 27MD5K monitor on Windows 10 1803.
 
 A friendly fork of 
@@ -24,11 +28,23 @@ A friendly fork of
 
 	manually imported the [libusb](https://github.com/libusb/libusb) library even with nuget package manager installed... need to figure out the correct way of using it.
 
+### 20190408
+
+- added the visual c++ GUI version with a super simple design. 
+
+	can be run as a standalone executable.
+
+## Known issues
+
+both solutions are not warning free. something to do with libusb itself as well as casting.
+
 ## Usage
 
 ### Release
 
-Download from `Released` [folder](/Tool_LG-Ultrafine-brightness/LG-Ultrafine-brightness/Released/) for the newest version. Check GitHub Release feature for stable version.
+Download from `Released` [folder](/Tool_LG-Ultrafine-brightness/LG-Ultrafine-brightness/Released/) for the newest version.
+
+**For GUI version, download 2 files in from `Released` in [this folder](/Tool_LG-Ultrafine-brightness/CLR_GUI/Released) and launch them.**
 
 ### Borrowed from @csujedihy 
 
@@ -54,7 +70,7 @@ Please go to this repo [https://github.com/velum/lguf-brightness](https://github
 Press '-' or '=' to adjust brightness.
 Press '[' or: ']' to fine tune.
 Press 'p' to use the minimum brightness
-Press '' to use the maximum brightness
+Press '\' to use the maximum brightness
 Press 'q' to quit.
 ```
 
