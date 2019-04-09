@@ -52,23 +52,15 @@ Download from `Released` [folder](/Tool_LG-Ultrafine-brightness/LG-Ultrafine-bri
 
 For GUI version, download 2 files in from `Released` in [this folder](/Tool_LG-Ultrafine-brightness/CLR_GUI/Released) and launch them.
 
-### Borrowed from @csujedihy 
-
 ---
+
+### Borrowed from @csujedihy 
 
 A tool to adjust brightness of LG Ultrafine 4k/5K on Windows without the help of Bootcamp. I built my own PC and made this tool to adjust brightness through my PC.
 
 The program simply send set feature report to the device via USB and then the LG 4/5K monitor adjust the brightness upon receiving such reports.
 
-This project is derived from [https://github.com/unknownzerx/lguf-brightness](https://github.com/unknownzerx/lguf-brightness). 
-
-Thanks @unknownzerx 
-
 The original tool was unable to adjust brightness in Windows 10 and I also made some minor improvements to it like showing current brightness and efficiency while adjusting.
-
-### Linux
-
-Please go to this repo [https://github.com/velum/lguf-brightness](https://github.com/velum/lguf-brightness).
 
 ### Usage
 
@@ -89,6 +81,12 @@ Press 'q' to quit.
 ~~Note that I put the hidapi.dll in the project and if you don't believe it's secure, you can build a new one (x64) and replace it.~~
 
 I had the 1.0.21 version of libusb with nuget. you can always manually build it.
+
+## Potential updates
+
+- Might change it into a standalone single file executable by linking the static library of libusb, but currently just decide to left out the .dll so that people can use their trusted version of libusb.
+
+- better UI design incorporated with system UI.
 
 ## Keywords
 
