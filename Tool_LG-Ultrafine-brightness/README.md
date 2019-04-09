@@ -1,3 +1,4 @@
+![logo](/Tool_LG-Ultrafine-brightness/brightness.png)
 
 ## Download
 
@@ -7,7 +8,7 @@ For commandline version, use the directory without GUI in its path.
 
 ## Description
 
-This is a working command line tool for adjusting brightness for LG UltraFine series monitors. Works fine with my LG UltraFine 5K - 27MD5K monitor on Windows 10 1803.
+This is a working command line tool for adjusting brightness for LG UltraFine series monitors. Works fine with my LG UltraFine 5K - 27MD5K monitor on Windows 10 1803. **x64 only.**
 
 A friendly fork of 
 
@@ -22,6 +23,8 @@ A friendly fork of
 - [velum/lguf-brightness](https://github.com/velum/lguf-brightness/)
 
 	the working version for Linux users.
+
+Notice: both tools compiles with `Release x64` settings. Other need to be brushed later.
 
 ## Versions
 

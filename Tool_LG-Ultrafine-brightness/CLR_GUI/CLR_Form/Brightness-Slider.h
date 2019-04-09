@@ -210,7 +210,8 @@ namespace CLRForm {
 			//TODO:  在此处添加构造函数代码
 			//
 			if (Initializelibusb() == EXIT_FAILURE) {
-				this->Text = "Error! sth went wrong, report in issue.";
+				this->Text = "Error! Check your connection";
+				this->trackBar1->Enabled = false;  // disable the slider
 			}
 		}
 
@@ -246,10 +247,11 @@ namespace CLRForm {
 			// 
 			// trackBar1
 			// 
-			this->trackBar1->Location = System::Drawing::Point(12, 12);
+			this->trackBar1->Location = System::Drawing::Point(6, 6);
+			this->trackBar1->Margin = System::Windows::Forms::Padding(2);
 			this->trackBar1->Maximum = 100;
 			this->trackBar1->Name = L"trackBar1";
-			this->trackBar1->Size = System::Drawing::Size(546, 90);
+			this->trackBar1->Size = System::Drawing::Size(273, 45);
 			this->trackBar1->TabIndex = 0;
 			this->trackBar1->TickFrequency = 10;
 			this->trackBar1->Scroll += gcnew System::EventHandler(this, &BrightnessSlider::trackBar1_Scroll);
@@ -257,11 +259,12 @@ namespace CLRForm {
 			// 
 			// BrightnessSlider
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 24);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(570, 108);
+			this->ClientSize = System::Drawing::Size(285, 54);
 			this->Controls->Add(this->trackBar1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"BrightnessSlider";
 			this->Text = L"BrightnessSlider";
 			this->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &BrightnessSlider::BrightnessSlider_KeyPress);
