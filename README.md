@@ -21,3 +21,7 @@
 ## [C#] Adobe Premiere Pro CC project file downgrader
 
 	downgrade the prproj file to former versions. designed for users who have compatibility issues.
+
+## [cpp] LG UltraFine brightness adjustment tool
+	
+	a command line brightness adjustment tool for LG UltraFine monitors.
