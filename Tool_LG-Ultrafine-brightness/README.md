@@ -42,7 +42,11 @@ Notice: both tools compiles with `Release x64` settings. Other need to be brushe
 
 ## Known issues
 
-both solutions are not warning free. something to do with libusb itself as well as casting.
+- both solutions are not warning free. something to do with libusb itself as well as casting.
+
+- on Windows, the brightness steps are not identical with the OSX steps.
+
+- when adjusting with `[` or `]`, the increasing steps are not smooth due to some logistic issue. check the source code to understand.
 
 ## Usage
 
@@ -51,6 +55,12 @@ both solutions are not warning free. something to do with libusb itself as well 
 Download from `Released` [folder](/Tool_LG-Ultrafine-brightness/LG-Ultrafine-brightness/Released/) for the newest version.
 
 For GUI version, download 2 files in from `Released` in [this folder](/Tool_LG-Ultrafine-brightness/CLR_GUI/Released) and launch them.
+
+### Brightness Steps
+
+refer to [this issue](https://github.com/unknownzerx/lguf-brightness/issues/10)
+
+compile parameters are in the src.
 
 ---
 
