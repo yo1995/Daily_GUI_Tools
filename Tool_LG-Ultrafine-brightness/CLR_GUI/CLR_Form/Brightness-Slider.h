@@ -54,8 +54,8 @@ const std::vector<uint16_t> big_steps = {
 
 uint16_t next_step(uint16_t val, const vector<uint16_t> &steps)
 {
-	auto start = 0;
-	auto end = steps.size() - 1;
+	int start = 0;
+	int end = (int)steps.size() - 1;
 	while (start + 1 < end)
 	{
 		auto mid = start + (end - start) / 2;
@@ -73,8 +73,8 @@ uint16_t next_step(uint16_t val, const vector<uint16_t> &steps)
 
 uint16_t prev_step(uint16_t val, const vector<uint16_t> &steps)
 {
-	auto start = 0;
-	auto end = steps.size() - 1;
+	int start = 0;
+	int end = (int)steps.size() - 1;
 	while (start + 1 < end)
 	{
 		auto mid = start + (end - start) / 2;
@@ -181,11 +181,11 @@ int percent_to_brightness(int percent) {
 
 
 // declare the libusb handle as a global variable
-libusb_device_handle *handle = NULL;
-libusb_device **devs = NULL;
-libusb_device *lgdev = NULL;
-int r, openCode, iface = 1;
-ssize_t cnt;
+extern libusb_device_handle *handle;
+extern libusb_device **devs;
+extern libusb_device *lgdev;
+extern int r, openCode, iface;
+extern ssize_t cnt;
 
 namespace CLRForm {
 
@@ -247,11 +247,11 @@ namespace CLRForm {
 			// 
 			// trackBar1
 			// 
-			this->trackBar1->Location = System::Drawing::Point(6, 6);
-			this->trackBar1->Margin = System::Windows::Forms::Padding(2);
+			this->trackBar1->Location = System::Drawing::Point(12, 12);
+			this->trackBar1->Margin = System::Windows::Forms::Padding(4);
 			this->trackBar1->Maximum = 100;
 			this->trackBar1->Name = L"trackBar1";
-			this->trackBar1->Size = System::Drawing::Size(273, 45);
+			this->trackBar1->Size = System::Drawing::Size(546, 90);
 			this->trackBar1->TabIndex = 0;
 			this->trackBar1->TickFrequency = 10;
 			this->trackBar1->Scroll += gcnew System::EventHandler(this, &BrightnessSlider::trackBar1_Scroll);
@@ -259,14 +259,15 @@ namespace CLRForm {
 			// 
 			// BrightnessSlider
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
+			this->AutoScaleDimensions = System::Drawing::SizeF(12, 24);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(285, 54);
+			this->ClientSize = System::Drawing::Size(570, 108);
 			this->Controls->Add(this->trackBar1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"BrightnessSlider";
 			this->Text = L"BrightnessSlider";
+			// this->Icon = gcnew System::Drawing::Icon("../brightness.ico");
 			this->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &BrightnessSlider::BrightnessSlider_KeyPress);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->EndInit();
 			this->ResumeLayout(false);
@@ -309,7 +310,6 @@ namespace CLRForm {
 					set_brightness(handle, brightness);	
 					this->trackBar1->Value = brightness_to_percent(brightness);
 
-					libusb_free_device_list(devs, 1);
 					return EXIT_SUCCESS;
 				}
 				else {

@@ -52,7 +52,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\brightness.ico">
+    <Image Include="..\brightness.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

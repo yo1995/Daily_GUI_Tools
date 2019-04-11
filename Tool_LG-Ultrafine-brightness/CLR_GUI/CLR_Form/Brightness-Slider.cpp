@@ -2,7 +2,13 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
-// [STAThread]
+
+// assign the global variables
+libusb_device_handle *handle = NULL;
+libusb_device **devs = NULL;
+libusb_device *lgdev = NULL;
+int r, openCode, iface = 1;
+ssize_t cnt;
 
 int main() {
 	Application::EnableVisualStyles();
@@ -10,7 +16,8 @@ int main() {
 	CLRForm::BrightnessSlider slider;
 	Application::Run(%slider);
 
-
+	// printf("we are here after running");
+	
 	if (handle) {
 		libusb_release_interface(handle, iface);
 		libusb_attach_kernel_driver(handle, iface);

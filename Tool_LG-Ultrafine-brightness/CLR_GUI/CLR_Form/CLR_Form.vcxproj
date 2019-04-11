@@ -149,11 +149,6 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Brightness-Slider.resx">
-      <DependentUpon>Brightness-Slider.h</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\packages\libusb.1.0.21\lib\native\x64\libusb-1.0.dll" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -164,7 +159,7 @@
     <ResourceCompile Include="CLR_Form.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\brightness.ico" />
+    <Image Include="..\brightness.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
