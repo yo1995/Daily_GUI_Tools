@@ -1,5 +1,7 @@
 ![logo](/Tool_LG-Ultrafine-brightness/brightness.png)
 
+Per report in #3, the latest version might not work with Windows 10 1903 yet.
+
 ## Download
 
 ~~For commandline version, use the directory without GUI in its path.~~ the command line version is not maintained. you can always try it with a latest version libusb .dll.
@@ -39,7 +41,6 @@ Notice: both tools compiles with `Release x64` settings. Other need to be brushe
 - added the visual c++ GUI version with a super simple design. 
 
 	can be run as a standalone executable.
-
 
 ### 20190529
 
@@ -97,7 +98,8 @@ Press 'q' to quit.
 
 ~~Note that I put the hidapi.dll in the project and if you don't believe it's secure, you can build a new one (x64) and replace it.~~
 
-~~I had the 1.0.21 version of libusb with nuget. you can always manually build it.~~ update 190529: v1.0.22. please update the files in 
+~~I had the 1.0.21 version of libusb with nuget. you can always manually build it.~~  
+update 190529: v1.0.22. please update the files in 
 
 ## Potential updates
 
