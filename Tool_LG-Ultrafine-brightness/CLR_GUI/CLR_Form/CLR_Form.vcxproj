@@ -101,11 +101,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\packages\libusb.1.0.21\src\include\libusb-1.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CLR_Form\libusb\include\libusb-1.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libusb-1.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\packages\libusb.1.0.21\lib\native\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\CLR_Form\libusb\MS64\dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -122,13 +122,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\packages\libusb.1.0.21\src\include\libusb-1.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CLR_Form\libusb\include\libusb-1.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libusb-1.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
-      <AdditionalLibraryDirectories>$(SolutionDir)\packages\libusb.1.0.21\lib\native\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\CLR_Form\libusb\MS64\dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -142,18 +142,17 @@
     <ClCompile Include="Brightness-Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\packages\libusb.1.0.21\src\include\libusb-1.0\libusb.h" />
     <ClInclude Include="Brightness-Slider.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="libusb-1.0.22\include\libusb-1.0\libusb.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\packages\libusb.1.0.21\lib\native\x64\libusb-1.0.dll" />
-    <None Include="packages.config" />
+    <None Include="libusb\MS64\dll\libusb-1.0.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\packages\libusb.1.0.21\lib\native\x64\libusb-1.0.lib" />
+    <Library Include="libusb\MS64\dll\libusb-1.0.lib" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CLR_Form.rc" />

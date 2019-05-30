@@ -2,7 +2,7 @@
 
 ## Download
 
-For commandline version, use the directory without GUI in its path.
+~~For commandline version, use the directory without GUI in its path.~~ the command line version is not maintained. you can always try it with a latest version libusb .dll.
 
 **For GUI version, download 2 files in [this folder](/Tool_LG-Ultrafine-brightness/CLR_GUI/Released) and launch them.**
 
@@ -39,6 +39,13 @@ Notice: both tools compiles with `Release x64` settings. Other need to be brushe
 - added the visual c++ GUI version with a super simple design. 
 
 	can be run as a standalone executable.
+
+
+### 20190529
+
+- upgraded libusb version to v1.0.22
+
+   to mitigate issue #3
 
 ## Known issues
 
@@ -90,7 +97,7 @@ Press 'q' to quit.
 
 ~~Note that I put the hidapi.dll in the project and if you don't believe it's secure, you can build a new one (x64) and replace it.~~
 
-I had the 1.0.21 version of libusb with nuget. you can always manually build it.
+~~I had the 1.0.21 version of libusb with nuget. you can always manually build it.~~ update 190529: v1.0.22. please update the files in 
 
 ## Potential updates
 

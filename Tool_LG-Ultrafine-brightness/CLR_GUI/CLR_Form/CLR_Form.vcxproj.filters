@@ -23,28 +23,12 @@
     <ClInclude Include="Brightness-Slider.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\packages\libusb.1.0.21\src\include\libusb-1.0\libusb.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="..\packages\libusb.1.0.21\lib\native\x64\libusb-1.0.dll">
-      <Filter>资源文件</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\packages\libusb.1.0.21\lib\native\x64\libusb-1.0.lib">
-      <Filter>资源文件</Filter>
-    </Library>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Brightness-Slider.resx">
-      <Filter>资源文件</Filter>
-    </EmbeddedResource>
+    <ClInclude Include="libusb-1.0.22\include\libusb-1.0\libusb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CLR_Form.rc">
@@ -55,5 +39,15 @@
     <Image Include="..\brightness.ico">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libusb\MS64\dll\libusb-1.0.dll">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libusb\MS64\dll\libusb-1.0.lib">
+      <Filter>资源文件</Filter>
+    </Library>
   </ItemGroup>
 </Project>
