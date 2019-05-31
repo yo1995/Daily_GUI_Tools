@@ -4,7 +4,13 @@
 
 ### 180904
 
+changed something, forgot.
 
+### 190530
+
+update table of version numbers
+
+more to add - a python version
 
 ## Description
 
@@ -18,6 +24,8 @@ This tool works until Pr reaches version 40. Just need to manually assign if lat
 
 | Product Name | Version |
 | ------ | ------ |
+| Pr CC 2019.4 | 37 |
+| Pr CC 2019   | 36 |
 | Pr CC 2018   | 35 |
 | Pr CC 2017.4 | 34 |
 | Pr CC 2017.1 | 33 |

@@ -8,13 +8,32 @@ using System.IO.Compression;
 using System.Windows.Forms;
 using System.Xml;
 
+
 namespace prproj_downgrader {
+
     public partial class Form1 : Form {
+        public static bool IsChineseSimple() {
+            return System.Threading.Thread.CurrentThread.CurrentCulture.Name == "zh-CN";
+        }
 
         string inFileName;
          
         public Form1() {
             InitializeComponent();
+            var selected1 = "1. 选择.prproj文件";
+            var selected2 = "2. 选择目标版本号";
+            var selected3 = "3. 转换并保存";
+            var b1 = "打开文件";
+            var b2 = "转换！";
+            var title = ".prproj 转换器";
+            if (IsChineseSimple()) {
+                label1.Text = selected1;
+                label2.Text = selected2;
+                label3.Text = selected3;
+                button1.Text = b1;
+                button2.Text = b2;
+                this.Text = title;
+            }
         }
 
         private void label1_Click(object sender, EventArgs e) {
@@ -26,10 +45,20 @@ namespace prproj_downgrader {
         }
 
         private void button1_Click(object sender, EventArgs e) {
+
+            var title = "请选择Adobe Premiere Pro CC工程文件";
+            var filter = "Pr项目文件(*.prproj)|*.prproj";
+            var selected = "1. 项目文件已选中";
+            if (!IsChineseSimple()) {
+                title = "Please choose Adobe Premiere Pro CC project file";
+                filter = "Pr project file(*.prproj)|*.prproj";
+                selected = "1. File Selected.";
+            }
+
             OpenFileDialog ofd = new OpenFileDialog {
                 Multiselect = false,
-                Title = "请选择Adobe Premiere Pro CC工程文件",
-                Filter = "Pr项目文件(*.prproj)|*.prproj",
+                Title = title,
+                Filter = filter,
                 ValidateNames = true,
                 CheckPathExists = true,
                 CheckFileExists = true,
@@ -39,7 +68,7 @@ namespace prproj_downgrader {
             if (ofd.ShowDialog() == DialogResult.OK) {
                 inFileName = ofd.FileName;
                 this.comboBox1.Enabled = true;
-                label1.Text = "1. File Selected.";
+                label1.Text = selected;
                 label1.BackColor = Color.Lime;
             }
             ofd.Dispose();
@@ -67,7 +96,14 @@ namespace prproj_downgrader {
             else {
                 this.textBox1.Enabled = false;
             }
-            label2.Text = "2. Version Selected.";
+
+            
+            var selected = "2. 版本号已选中";
+            if (!IsChineseSimple()) {
+                selected = "2. Version Selected.";
+            }
+
+            label2.Text = selected;
             label2.BackColor = Color.Lime;
             this.button2.Enabled = true;
         }
@@ -76,6 +112,12 @@ namespace prproj_downgrader {
             int version = 0;
             var item = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
             switch (item) {
+                case "Premiere Pro CC 2019.4 - 37":
+                    version = 37;
+                    break;
+                case "Premiere Pro CC 2019 - 36":
+                    version = 36;
+                    break;
                 case "Premiere Pro CC 2018 - 35":
                     version = 35;
                     break;
@@ -111,10 +153,19 @@ namespace prproj_downgrader {
             Decompress(inFileName, outFilename);
             Change_Version(outFilename, version);
 
+            var selected1 = "1. 选择.prproj文件";
+            var selected2 = "2. 选择目标版本号";
+            if (!IsChineseSimple()) {
+                selected1 = "1. Select .prproj file";
+                selected2 = "2. Select target version";
+            }
+            // clear the text in combo box and textbox for custom version number
+            this.comboBox1.Text = null;
+            this.textBox1.Text = null;
 
             // reset values
-            label1.Text = "1. Select .prproj file";
-            label2.Text = "2. Select target version";
+            label1.Text = selected1;
+            label2.Text = selected2;
             label1.BackColor = SystemColors.Control;
             label2.BackColor = SystemColors.Control;
             this.button2.Enabled = false;  // only convert one file once
@@ -149,7 +200,13 @@ namespace prproj_downgrader {
             XmlElement root = document.DocumentElement;
             // XmlNodeList Nodes = root.GetElementsByTagName("Project");
             XmlNode selectedNode = root.SelectSingleNode("descendant::Project[@ObjectID='1']");
-            MessageBox.Show("Conversion done! The original project version is: v" + selectedNode.Attributes["Version"].Value);
+
+            var msg = "转换成功！原版本号为v" + selectedNode.Attributes["Version"].Value;
+            if (!IsChineseSimple()) {
+                msg = "Conversion done! The original project version is: v" + selectedNode.Attributes["Version"].Value;
+            }
+
+            MessageBox.Show(msg);
             selectedNode.Attributes["Version"].Value = version.ToString();
             document.Save(out_file_name);  // overwrite the file
         }
