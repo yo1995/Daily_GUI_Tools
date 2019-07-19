@@ -7,10 +7,10 @@
 #include <conio.h>  // for getchar only. remove later
 
 #include "libusb.h"
+#include "log.h"
 
 
 // From the HID spec:
-
 static const int HID_GET_REPORT = 0x01;
 static const int HID_SET_REPORT = 0x09;
 static const int HID_REPORT_TYPE_INPUT = 0x01;
@@ -22,6 +22,11 @@ const uint16_t vendor_id = 0x43e;
 const uint16_t product_id = 0x9a40;
 const uint16_t max_brightness = 0xd2f0;
 const uint16_t min_brightness = 0x0000;
+
+const std::vector<uint16_t> product_id_enumeration = {
+	0x9a40,  // LG Ultrafine 5K 1st gen
+	0x9A63  // LG Ultrafine 4K 23.7 2019
+};
 
 const std::vector<uint16_t> small_steps = {
 	0x0000,
@@ -100,6 +105,7 @@ uint16_t get_brightness(libusb_device_handle *handle)
 
 	if (res < 0)
 	{
+		LOG("Unable to get brightness.\nlibusb_control_transfer error.");
 		printf("Unable to get brightness.\n");
 		printf("libusb_control_transfer error: %s (%d)\n", libusb_error_name(res), res);
 	}
@@ -129,6 +135,7 @@ void set_brightness(libusb_device_handle *handle, uint16_t val)
 
 	if (res < 0)
 	{
+		LOG("Unable to set brightness. libusb_control_transfer error.");
 		printf("Unable to set brightness.\n");
 		printf("libusb_control_transfer error: %s\n", libusb_error_name(res));
 	}
@@ -146,22 +153,23 @@ static libusb_device *get_lg_ultrafine_usb_device(libusb_device **devs) {
 		struct libusb_device_descriptor desc;
 		int r = libusb_get_device_descriptor(dev, &desc);
 		if (r < 0) {
-			printf("failed to get device descriptor");
+			LOG("Failed to get device descriptor.");
+			printf("Failed to get device descriptor");
 			return NULL;
 		}
 
-		if (desc.idVendor == vendor_id && desc.idProduct == product_id) {
-			lgdev = dev;
+		for (size_t i = 0; i < product_id_enumeration.size(); ++i) {
+			if (desc.idVendor == vendor_id && desc.idProduct == product_id_enumeration[i])
+			{
+				lgdev = dev;
+				break;
+			}
+			else {
+				LOG2("Tried with product id: ", product_id_enumeration[i]);
+				LOG("Not the correct product id, try other viable ids.");
+				printf("Not the correct product_id, try other viable ids.\n");
+			}
 		}
-
-		// r = libusb_get_port_numbers(dev, path, sizeof(path));
-		// if (r > 0)
-		// {
-		//     printf(" path: %d", path[0]);
-		//     for (j = 1; j < r; j++)
-		//         printf(".%d", path[j]);
-		// }
-		// printf("\n");
 	}
 
 	return lgdev;
@@ -209,6 +217,7 @@ namespace CLRForm {
 			//
 			//TODO:  在此处添加构造函数代码
 			//
+			// LOG_FUNC
 			if (Initializelibusb() == EXIT_FAILURE) {
 				this->Text = "Error! Check your connection";
 				this->trackBar1->Enabled = false;  // disable the slider
@@ -279,12 +288,14 @@ namespace CLRForm {
 			r = libusb_init(NULL);
 			libusb_set_debug(NULL, LIBUSB_LOG_LEVEL_WARNING);       // LIBUSB_LOG_LEVEL_DEBUG  
 			if (r < 0) {
+				LOG("Unable to initialize libusb.");
 				printf("Unable to initialize libusb.\n");
 				return EXIT_FAILURE;
 			}
 
 			cnt = libusb_get_device_list(NULL, &devs);
 			if (cnt < 0) {
+				LOG("Unable to get USB device list.");
 				printf("Unable to get USB device list (%d).\n", int(cnt));
 				return EXIT_FAILURE;
 			}
@@ -292,7 +303,8 @@ namespace CLRForm {
 			lgdev = get_lg_ultrafine_usb_device(devs);
 
 			if (lgdev == NULL) {
-				printf("Failed to get LG screen device.\n");
+				LOG("Failed to get LG screen device. Are you using other brand monitor?");
+				printf("Failed to get LG screen device. Are you using other brand monitor?\n");
 				return EXIT_FAILURE;
 			}
 
@@ -313,12 +325,14 @@ namespace CLRForm {
 					return EXIT_SUCCESS;
 				}
 				else {
+					LOG("Failed to claim interface.");
 					printf("Failed to claim interface %d. Error: %d\n", iface, r);
 					printf("Error: %s\n", libusb_error_name(r));
 					return EXIT_FAILURE;
 				}
 			}
 			else {
+				LOG("libusb_open failed and returned.");
 				printf("libusb_open failed and returned %d\n", openCode);
 				return EXIT_FAILURE;
 			}

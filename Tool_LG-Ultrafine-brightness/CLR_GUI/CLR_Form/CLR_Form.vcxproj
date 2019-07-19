@@ -146,6 +146,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="libusb-1.0.22\include\libusb-1.0\libusb.h" />
+    <ClInclude Include="log.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

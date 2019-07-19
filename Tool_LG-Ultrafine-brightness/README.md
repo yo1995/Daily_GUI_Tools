@@ -1,16 +1,18 @@
 ![logo](/Tool_LG-Ultrafine-brightness/brightness.png)
 
-Per report in #3, the latest version might not work with Windows 10 1903 yet.
-
 ## Download
 
-~~For commandline version, use the directory without GUI in its path.~~ the command line version is not maintained. you can always try it with a latest version libusb .dll.
+~~**For commandline version, use the directory without GUI in its path.**~~  
+the command line version is not actively maintained. you can always try it with a latest version libusb .dll.
 
 **For GUI version, download 2 files in [this folder](/Tool_LG-Ultrafine-brightness/CLR_GUI/Released) and launch them.**
 
 ## Description
 
-This is a working command line tool for adjusting brightness for LG UltraFine series monitors. Works fine with my LG UltraFine 5K - 27MD5K monitor on Windows 10 1803. **x64 only.**
+This is a working command line tool for adjusting brightness for LG UltraFine series monitors.  
+Works fine with my LG UltraFine 5K - 27MD5K monitor on Windows 10 1803.  
+Also reportedly work with LG UltraFine 4K - 24MD4KL 23.7 2019, per #5.  
+**x64 only.**
 
 A friendly fork of 
 
@@ -26,7 +28,7 @@ A friendly fork of
 
 	the working version for Linux users.
 
-Notice: both tools compiles with `Release x64` settings. Other need to be brushed later.
+Notice: both tools compiles with `Release x64` settings. Other schemes need to be brushed later.
 
 ## Versions
 
@@ -46,7 +48,13 @@ Notice: both tools compiles with `Release x64` settings. Other need to be brushe
 
 - upgraded libusb version to v1.0.22
 
-   to mitigate issue #3
+	to mitigate issue #3: Per report in #3, the latest version might not work with Windows 10 1903 yet.
+
+### 20190719
+
+- Added logging, also fixed #5
+	
+	so it supports not only 5K but also latest 4K
 
 ## Known issues
 
@@ -109,4 +117,4 @@ update 190529: v1.0.22. please update the files in
 
 ## Keywords
 
-easy | tool | LG UltraFine | lg-ultrafine | brightness
+easy | tool | LG UltraFine | lg-ultrafine | brightness | 4K | 5K 

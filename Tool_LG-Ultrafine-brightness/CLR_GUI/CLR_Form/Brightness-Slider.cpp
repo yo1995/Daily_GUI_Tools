@@ -11,11 +11,11 @@ int r, openCode, iface = 1;
 ssize_t cnt;
 
 int main() {
+	// LOG_FUNC_BEGIN
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	CLRForm::BrightnessSlider slider;
 	Application::Run(%slider);
-
 	// printf("we are here after running");
 	
 	if (handle) {
@@ -29,5 +29,5 @@ int main() {
 			libusb_exit(NULL);
 		}
 	}
-	
+	// LOG_FUNC_END
 }

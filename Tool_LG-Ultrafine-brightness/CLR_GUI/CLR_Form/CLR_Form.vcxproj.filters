@@ -29,6 +29,9 @@
     <ClInclude Include="libusb-1.0.22\include\libusb-1.0\libusb.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="log.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CLR_Form.rc">
