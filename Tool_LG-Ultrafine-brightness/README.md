@@ -7,6 +7,8 @@ the command line version is not actively maintained. you can always try it with 
 
 **For GUI version, download 2 files in [this folder](/Tool_LG-Ultrafine-brightness/CLR_GUI/Released) and launch them.**
 
+For BootCamp users, Boot Camp Support Software 6.1.10 released recently should mitigate this problem. Please update accordingly via Apple Software Update.
+
 ## Description
 
 This is a working command line tool for adjusting brightness for LG UltraFine series monitors.  
