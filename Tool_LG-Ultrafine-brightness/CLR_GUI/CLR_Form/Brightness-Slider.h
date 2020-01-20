@@ -19,12 +19,12 @@ static const int HID_REPORT_TYPE_FEATURE = 0x03;
 
 using std::vector;
 const uint16_t vendor_id = 0x43e;
-const uint16_t product_id = 0x9a40;
+// const uint16_t product_id = 0x9a40;
 const uint16_t max_brightness = 0xd2f0;
 const uint16_t min_brightness = 0x0000;
 
-const std::vector<uint16_t> product_id_enumeration = {
-	0x9a40,  // LG Ultrafine 5K 1st gen
+std::vector<uint16_t> product_id_enumeration = {
+	0x9A40,  // LG Ultrafine 5K 1st gen
 	0x9A63  // LG Ultrafine 4K 23.7 2019
 };
 

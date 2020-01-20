@@ -32,17 +32,17 @@ Notice: both tools compiles with `Release x64` settings. Other schemes need to b
 
 ## Versions
 
-### 20190407
+### 20200119
 
-- added first version. works fine with mine.
+- Added new device id (idProduct) for 27MD5KL-B and fixed #7
+	
+	so it supports not only original 5K(27MD5K) but also latest 4K and latest 5K. will consider extracting all the conf into a separate JSON file in the future. (I don't like to deal with C++ btw...) https://github.com/nothings/single_file_libs#json
 
-	manually imported the [libusb](https://github.com/libusb/libusb) library even with nuget package manager installed... need to figure out the correct way of using it.
+### 20190719
 
-### 20190408
-
-- added the visual c++ GUI version with a super simple design. 
-
-	can be run as a standalone executable.
+- Added logging, also fixed #5
+	
+	so it supports not only 5K but also latest 4K
 
 ### 20190529
 
@@ -50,11 +50,17 @@ Notice: both tools compiles with `Release x64` settings. Other schemes need to b
 
 	to mitigate issue #3: Per report in #3, the latest version might not work with Windows 10 1903 yet.
 
-### 20190719
+### 20190408
 
-- Added logging, also fixed #5
-	
-	so it supports not only 5K but also latest 4K
+- added the visual c++ GUI version with a super simple design. 
+
+	can be run as a standalone executable.
+
+### 20190407
+
+- added first version. works fine with mine.
+
+	manually imported the [libusb](https://github.com/libusb/libusb) library even with nuget package manager installed... need to figure out the correct way of using it.
 
 ## Known issues
 

@@ -140,11 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brightness-Slider.cpp" />
+    <ClCompile Include="cfgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brightness-Slider.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="cfgr.h" />
     <ClInclude Include="libusb-1.0.22\include\libusb-1.0\libusb.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="resource.h" />
