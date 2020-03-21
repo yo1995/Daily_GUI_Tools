@@ -6,7 +6,7 @@ This software is currently not actively maintained. Please read more below.
 
 ## Download
 
-Please check out the software in #8 on [Microsoft Store](https://www.microsoft.com/en-us/p/lg-ultrafine-brightness/9n5mj2fq4gww) for a more modern version! 
+Please check out the software in [#8](https://github.com/yo1995/Daily_GUI_Tools/issues/8) on [Microsoft Store](https://www.microsoft.com/en-us/p/lg-ultrafine-brightness/9n5mj2fq4gww) for a more modern version! 
 
 ~~**For commandline version, use the directory without GUI in its path.**~~  
 the command line version is not actively maintained. you can always try it with a latest version libusb .dll.
