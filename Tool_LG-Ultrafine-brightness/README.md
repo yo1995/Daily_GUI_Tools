@@ -1,6 +1,12 @@
 ![logo](/Tool_LG-Ultrafine-brightness/brightness.png)
 
+## Stop of support notice
+
+This software is currently not actively maintained. Please read more below.
+
 ## Download
+
+Please check out the software in #8 on [Microsoft Store](https://www.microsoft.com/en-us/p/lg-ultrafine-brightness/9n5mj2fq4gww) for a more modern version! 
 
 ~~**For commandline version, use the directory without GUI in its path.**~~  
 the command line version is not actively maintained. you can always try it with a latest version libusb .dll.
@@ -33,6 +39,12 @@ A friendly fork of
 Notice: both tools compiles with `Release x64` settings. Other schemes need to be brushed later.
 
 ## Versions
+
+### 20200321
+
+- Will stop support this software
+
+	...as I've lost my access to the 5K monitor, hence not being able to test build the code. :cry:
 
 ### 20200119
 
